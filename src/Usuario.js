@@ -9,8 +9,8 @@ function crearUsuario(datos, id = null) {
         usuario.nombreCompleto = datos.nombreCompleto
     }
 
-    if (!datos.email) {
-        throw crearErrorDatosInvalidos('Falta el email')
+    if(!datos.email) {
+        throw crearErrorDatosInvalidos('Ingreso inválido del email')
     } else {
         usuario.email = datos.email
     }

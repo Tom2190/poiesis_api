@@ -7,13 +7,12 @@ async function crearEnviadorEmails(service, user, pass, to, subject) {
         enviar: async (texto) => {
             let transporter = nodemailer.createTransport({
                 service: service,
-                logger: true,
                 auth: {
                     user: user,
                     pass: pass
                 }
             })
-            console.log("Email enviado")
+
             await transporter.sendMail({
                 from: 'escritura.poiesis@gmail.com',
                 to: to,
@@ -41,5 +40,5 @@ async function enviarEmailAutorizado(usuario) {
 }
 
 
-export { crearEnviadorEmails, enviarEmailAutorizado }
+export { enviarEmailAutorizado }
 
