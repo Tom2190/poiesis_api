@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer'
 
-async function crearEnviadorEmails(service, user, pass, to, subject) {
+async function crearEnviadorEmails(service, user, pass) {
 
     return {
-        enviar: async (texto) => {
+        enviar: async (texto, to, subject) => {
             let transporter = nodemailer.createTransport({
                 service: service,
                 auth: {

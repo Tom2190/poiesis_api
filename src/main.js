@@ -1,5 +1,6 @@
 import { crearDaoUsuarios } from '../src/daoUsuarios.js'
 import { autorizarUsuario } from './autorizarUsuario.js'
+import { crearEnviadorEmails } from './enviadorEmails.js'
 import dotenv from 'dotenv'
 
 const datosUsuario = {
@@ -13,16 +14,17 @@ const datosUsuario = {
 
 dotenv.config()
 
-let service = process.env.SERVICE
-let user = process.env.USER
-let pass = process.env.PASS
+const service = process.env.SERVICE
+const user = process.env.USER
+const pass = process.env.PASS
 
 async function main() {
   
   const baseDeDatos = crearDaoUsuarios()
   const usuario = await baseDeDatos.add(datosUsuario)
   console.log(await baseDeDatos.getAll())
-  await autorizarUsuario(baseDeDatos,usuario,service,user,pass)
+  const enviador = await crearEnviadorEmails(service,user,pass)
+  await autorizarUsuario(enviador,baseDeDatos,usuario)
   console.log(await baseDeDatos.getAll())
 }
 

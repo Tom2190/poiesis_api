@@ -1,6 +1,4 @@
-import { crearEnviadorEmails } from './enviadorEmails.js'
-
-async function autorizarUsuario(baseDeDatos,usuario,service,user,pass) {
+async function autorizarUsuario(enviador,baseDeDatos,usuario) {
 
     await baseDeDatos.updateAutorizado(usuario)
 
@@ -8,9 +6,7 @@ async function autorizarUsuario(baseDeDatos,usuario,service,user,pass) {
     let subject = '¡Usuario Actualizado!'
     let texto = 'Su usuario ahora puede publicar textos en el Área Común.'
 
-    
-    const enviador = await crearEnviadorEmails(service, user, pass, to, subject)
-    await enviador.enviar(texto)
+    await enviador.enviar(texto, to, subject)
 }
 
 export { autorizarUsuario }
