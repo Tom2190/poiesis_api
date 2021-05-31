@@ -19,12 +19,14 @@ const user = process.env.USER
 const pass = process.env.PASS
 
 async function main() {
-  
+
   const baseDeDatos = crearDaoUsuarios()
   const usuario = await baseDeDatos.add(datosUsuario)
+  console.log('Usuario no autorizado a publicar textos:')
   console.log(await baseDeDatos.getAll())
   const enviador = await crearEnviadorEmails(service,user,pass)
   await autorizarUsuario(enviador,baseDeDatos,usuario)
+  console.log('Usuario autorizado a publicar textos:')
   console.log(await baseDeDatos.getAll())
 }
 
