@@ -28,8 +28,9 @@ async function main() {
   console.log(await baseDeDatos.getAll())
  
   const enviador = await crearEnviadorEmails(service,user,pass)
-  const autorizador = await crearAutorizador(enviador,baseDeDatos)
-  await autorizador.autorizar(usuario)
+  const autorizador = await crearAutorizador(enviador)
+  const usuarioAutorizado = await autorizador.autorizar(usuario)
+  await baseDeDatos.update(usuarioAutorizado)
 
   console.log('Usuario autorizado a publicar textos:')
   console.log(await baseDeDatos.getAll())
