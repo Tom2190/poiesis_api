@@ -52,4 +52,9 @@ function crearUsuario(datos, id = null) {
     return usuario
 }
 
-export { crearUsuario }
+async function autorizarUsuario(usuario) {
+    usuario.publicarTextos = true
+    return usuario
+}
+
+export { crearUsuario, autorizarUsuario }

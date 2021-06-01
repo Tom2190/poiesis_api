@@ -1,26 +1,20 @@
-import { crearUsuario } from '../src/Usuario.js'
-
 function crearDaoUsuarios() {
 
   const usuarios = []
 
   return {
-    add: async (datos) => {
-      const usuario = crearUsuario(datos)
+    add: async (usuario) => {
       usuarios.push(usuario)
-      return usuario
     },
     getAll: async () => {
       return [...usuarios]
     },
-    updateAutorizado: async (usuario) => {
+    update: async (usuario) => {
       const indiceParaReemplazar = usuarios.findIndex(u => u.id == usuario.id)
       if (indiceParaReemplazar === -1) {
-        return { updated: 0 }
+        console.log('No se pudo encontrar el usuario.')
       } else {
-        usuario.publicarTextos = true
         usuarios.splice(indiceParaReemplazar, 1, usuario)
-        return usuario
       }
     }
   }

@@ -1,12 +1,20 @@
-async function autorizarUsuario(enviador,baseDeDatos,usuario) {
+import { autorizarUsuario } from './Usuario.js'
 
-    await baseDeDatos.updateAutorizado(usuario)
+async function crearAutorizador(enviador, baseDeDatos) {
 
-    let to = usuario.email
-    let subject = '¡Usuario Actualizado!'
-    let texto = 'Su usuario ahora puede publicar textos en el Área Común.'
+    return {
+        autorizar: async (usuario) => {
+            const usuarioAutorizado = await autorizarUsuario(usuario)
+            await baseDeDatos.update(usuarioAutorizado)
 
-    await enviador.enviar(texto, to, subject)
+            let to = usuario.email
+            let subject = '¡Usuario actualizado!'
+            let texto = 'Su usuario ahora puede publicar textos en el Área Común.'
+
+            await enviador.enviar(texto, to, subject)
+        }
+    }
+
 }
 
-export { autorizarUsuario }
+export { crearAutorizador }
