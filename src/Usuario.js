@@ -1,7 +1,12 @@
 let nextId = 1
 
 function crearUsuario(datos, id = null) {
-    const usuario = {}
+    
+    const usuario = {
+        autorizar() {
+            usuario.publicarTextos = true
+        }
+    }
 
     if (!datos.nombreCompleto) {
         throw crearErrorDatosInvalidos('Falta el nombre')
@@ -39,8 +44,6 @@ function crearUsuario(datos, id = null) {
         usuario.celular = datos.celular
     }
 
-    usuario.publicarTextos = false
-
     if (id) {
         usuario.id = Number(id)
     } else if (!isNaN(Number(datos.id))) {
@@ -49,12 +52,9 @@ function crearUsuario(datos, id = null) {
         usuario.id = nextId++
     }
 
+    usuario.publicarTextos = false
+
     return usuario
 }
 
-async function autorizarUsuario(usuario) {
-    usuario.publicarTextos = true
-    return usuario
-}
-
-export { crearUsuario, autorizarUsuario }
+export { crearUsuario }
