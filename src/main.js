@@ -1,8 +1,6 @@
+
 import { crearDaoUsuarios } from '../src/daoUsuarios.js'
-import { crearAutorizador } from './autorizarUsuario.js'
-import { crearEnviadorEmails } from './enviadorEmails.js'
 import { crearUsuario } from './Usuario.js'
-import dotenv from 'dotenv'
 
 const datosUsuario = {
     nombreCompleto: 'Tomás Fernández Abrevaya',
@@ -13,27 +11,16 @@ const datosUsuario = {
     celular: '11-1111-1111'
 }
 
-dotenv.config()
-
-const service = process.env.SERVICE
-const user = process.env.USER
-const pass = process.env.PASS
-
 async function main() {
 
   const baseDeDatos = crearDaoUsuarios()
   const usuario = crearUsuario(datosUsuario)
   await baseDeDatos.add(usuario)
-  console.log('Usuario no autorizado a publicar textos:')
-  console.log(await baseDeDatos.getAll())
  
-  const enviador = await crearEnviadorEmails(service,user,pass)
-  const autorizador = await crearAutorizador(enviador)
+  const autorizador = await crearCUAutorizador()
   await autorizador.autorizarUsuario(usuario)
   await baseDeDatos.update(usuario)
 
-  console.log('Usuario autorizado a publicar textos:')
-  console.log(await baseDeDatos.getAll())
 
 }
 
