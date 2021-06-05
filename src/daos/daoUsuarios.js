@@ -5,11 +5,15 @@ function crearDaoUsuarios() {
   return {
     add: async (usuario) => {
       const usuarioBuscado = usuarios.find(u => u.id === id)
-      if (usuarioBuscado === null) {
-        console.log('El usuario ya fue ingresado.')
-      } else {
+      if (!usuarioBuscado) {
         usuarios.push(usuario)
+      } else {
+        console.log('El usuario ya fue ingresado.')
       }
+    },
+    getById: async (id) => {
+      const usuarioBuscado = usuarios.find(u => u.id === id)
+      return usuarioBuscado
     },
     getAll: async () => {
       return [...usuarios]

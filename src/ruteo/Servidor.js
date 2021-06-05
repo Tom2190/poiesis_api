@@ -1,13 +1,13 @@
 import express from 'express'
 import { crearRouterUsuarios } from './routerUsuarios.js'
 
-function crearServidor({ aplicacion, port = 0 }) {
+function crearServidor(port) {
 
     const app = express()
 
     app.use(express.json())
 
-    app.use('/usuarios', crearRouterUsuarios(aplicacion))
+    app.use('/usuarios', crearRouterUsuarios())
 
     return new Promise((resolve, reject) => {
         const server = app.listen(port)

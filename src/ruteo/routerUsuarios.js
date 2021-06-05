@@ -1,12 +1,17 @@
 import express from 'express'
-import CUFactory from '../src/CUAutorizar_Usuarios/CUFactory.,js'
+import CUFactory from '../CUAutorizar_Usuarios/CUFactory.js'
 
-const router = express.Router()
+function crearRouterUsuarios() {
+  
+  const router = express.Router()
+  
+  router.post('/', async (req, res) => {
+    const CU_Autorizador = await CUFactory.crearCU_Autorizador()
+    await CU_Autorizador.autorizarUsuario(req.body.id)
+    res.json({ msg: 'ok' })
+  })
 
-router.post('/', async (req, res) => {
-  const CU_Autorizador = CUFactory.crearCU_Autorizador()
-  await CU_Autorizador.autorizarUsuario(req.body)
-  res.json({ msg: 'ok' })
-})
+  return router
+}
 
-export default router
+export { crearRouterUsuarios }

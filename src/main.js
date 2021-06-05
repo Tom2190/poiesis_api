@@ -1,27 +1,13 @@
+import { crearServidor } from '../src/ruteo/servidor.js'
+import { crearClienteRest } from './ClienteRest.js'
 
-import { crearDaoUsuarios } from '../src/daoUsuarios.js'
-import { crearUsuario } from './Usuario.js'
+const port = 3000
+const servidor = await crearServidor(port)
+const cliente = crearClienteRest({
+  url: `http://localhost:${port}/usuarios`
+})
 
-const datosUsuario = {
-    nombreCompleto: 'Tomás Fernández Abrevaya',
-    email: 'fernandez.abrevaya@gmail.com',
-    diaHorario: 'Viernes a las 19 h',
-    frecuenciaEscritura: 'Avanzada',
-    generoEscritura: 'Ficción',
-    celular: '11-1111-1111'
-}
+const { data } = await cliente.autorizar(1)
+console.log(data)
 
-async function main() {
-
-  const baseDeDatos = crearDaoUsuarios()
-  const usuario = crearUsuario(datosUsuario)
-  await baseDeDatos.add(usuario)
- 
-  const autorizador = await crearCUAutorizador()
-  await autorizador.autorizarUsuario(usuario)
-  await baseDeDatos.update(usuario)
-
-
-}
-
-main()
+servidor.close()
