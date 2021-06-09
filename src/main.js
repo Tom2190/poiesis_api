@@ -1,13 +1,4 @@
-import { crearServidor } from '../src/ruteo/servidor.js'
-import { crearClienteRest } from './ClienteRest.js'
+import { crearServidor } from './compartido/servidor/servidor.js'
 
 const port = 3000
-const servidor = await crearServidor(port)
-const cliente = crearClienteRest({
-  url: `http://localhost:${port}/usuarios`
-})
-
-const { data } = await cliente.autorizar(1)
-console.log(data)
-
-servidor.close()
+await crearServidor(port)

@@ -1,14 +1,7 @@
-import { crearDaoUsuarios } from '../daos/daoUsuarios.js'
-import { crearEnviadorEmails } from './enviadorEmails.js'
+import { crearDaoUsuarios } from '../persistencia/daoUsuarios.js'
+import { crearEnviadorEmailsFactory } from '../../compartido/mail/EnviadorEmailsFactory.js'
 import { crearAutorizador } from './autorizarUsuario.js'
-import { crearUsuario } from '../Modelos/Usuario.js'
-import dotenv from 'dotenv'
-
-dotenv.config()
-const service = process.env.SERVICE
-const user = process.env.USER
-const pass = process.env.PASS
-const enviador = await crearEnviadorEmails(service,user,pass)
+import { crearUsuario } from '../../modelos/Usuario.js'
 
 const datosUsuario = {
     nombreCompleto: 'Tomás Fernández Abrevaya',
@@ -19,6 +12,7 @@ const datosUsuario = {
     celular: '11-1111-1111'
 }
 
+const enviador = await crearEnviadorEmailsFactory()
 const usuario = crearUsuario(datosUsuario)
 const dao = crearDaoUsuarios()
 await dao.add(usuario)

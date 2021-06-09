@@ -1,7 +1,7 @@
 import express from 'express'
-import { crearRouterUsuarios } from './routerUsuarios.js'
+import { crearRouterUsuarios } from '../../autorizarUsuario/ruteo/routerUsuarios.js'
 
-function crearServidor(port) {
+async function crearServidor(port) {
 
     const app = express()
 

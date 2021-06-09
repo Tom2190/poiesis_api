@@ -1,5 +1,5 @@
 import express from 'express'
-import CUFactory from '../CUAutorizar_Usuarios/CUFactory.js'
+import CUFactory from '../negocio/CUFactory.js'
 
 function crearRouterUsuarios() {
   
