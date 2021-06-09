@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node ./src/main.js",
-    "test": "node ./test/testServer.js"
+    "test": "node ./test/testCUMailer.js"
   },
   "keywords": [],
   "author": "",

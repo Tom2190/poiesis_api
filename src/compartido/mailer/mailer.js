@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-async function crearEnviadorEmails(service, user, pass) {
+async function crearMailer(service, user, pass) {
 
     return {
         enviar: async (texto, to, subject) => {
@@ -23,4 +23,4 @@ async function crearEnviadorEmails(service, user, pass) {
     }
 }
 
-export { crearEnviadorEmails }
+export { crearMailer }
