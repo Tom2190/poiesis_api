@@ -1,13 +1,14 @@
 import express from 'express'
-import { crearRouterUsuarios } from '../../autorizarUsuario/ruteo/routerUsuarios.js'
+import createUserRouter from '../../User/routers/userRouter.js';
+import createSignUpRouter from '../../User/routers/signUpRouter.js';
 
-async function crearServidor(port) {
+async function createServer(port) {
 
     const app = express()
-
     app.use(express.json())
 
-    app.use('/usuarios', crearRouterUsuarios())
+    app.use('/users', createUserRouter())
+    app.use('/signup', createSignUpRouter())
 
     return new Promise((resolve, reject) => {
         const server = app.listen(port)
@@ -21,4 +22,4 @@ async function crearServidor(port) {
     })
 }
 
-export { crearServidor }
+export default createServer
