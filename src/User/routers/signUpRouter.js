@@ -6,9 +6,10 @@ import createRegisterUserFactory from '../business/RegisterUserFactory.js';
 function createSignUpRouter() {
   const signUpRouter = express.Router()
 
+  const registerUserFactory = createRegisterUserFactory();
+  
   signUpRouter.post('/', async(req, res, next) => {
     try {
-      const registerUserFactory = createRegisterUserFactory();
       const user = await registerUserFactory.registerUser(req.body);
       const token = getToken({ id: user.id })
       res.json({ token })

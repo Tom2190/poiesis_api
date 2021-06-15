@@ -4,6 +4,7 @@ import createErrorFactory from '../../compartido/errors/ErrorFactory.js';
 
 function createRegisterUser(daoUsers, daoEmailText, mailer) {
   const errorFactory = createErrorFactory();
+  
   return {
     registerUser: async (userData) => {
       const user = createUser(userData)
