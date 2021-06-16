@@ -1,5 +1,18 @@
 function createUserDao() {
   const users = []
+  const testUser = {
+    name: "Tomás",
+    lastName: "Fernández",
+    email: "fernandez.abrevaya@gmail.com",
+    password: "123456",
+    chosenDateTime: "Martes y Jueves",
+    writingFrecuency: "Alta",
+    writingGenre: "Ficción",
+    phone: "1123318739",
+    dni: "43820248",
+    id: 0
+  }
+  users.push(testUser)
 
   return {
     add: async (user) => {
@@ -12,8 +25,7 @@ function createUserDao() {
       return true;
     },
     getById: async (id) => {
-      const searchedUser = users.find(u => u.id === id)
-      return searchedUser
+      return users.find(u => u.id === id)
     },
     getAll: async () => {
       return [...users]

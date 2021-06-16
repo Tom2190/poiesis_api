@@ -3,7 +3,7 @@ import createEmailTextDao from "../persistence/emailTextDao.js";
 import createMailerFactory from "../../shared/mailer/MailerFactory.js";
 import createAuthUser from "./authUser.js";
 
-const mailer = createMailerFactory();
+const mailer = await createMailerFactory();
 const userDao = createUserDao();
 const emailTextDao = createEmailTextDao();
 

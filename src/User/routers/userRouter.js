@@ -3,10 +3,10 @@ import createAuthUserFactory from "../business/authUserFactory.js";
 
 function createUserRouter() {
   const router = express.Router();
+  const authUserFactory = createAuthUserFactory();
 
-  router.post("/", async (req, res) => {
+  router.post("/", async (req, res, next) => {
     try {
-      const authUserFactory = createAuthUserFactory();
       await authUserFactory.authUser(req.body.id);
       res.json({ msg: "ok" });
     } catch (error) {
@@ -25,7 +25,7 @@ function createUserRouter() {
     } else {
       res.status(500)
     } */
-    res.status(400).json({ message: error.message });
+    res.json({ message: error.message });
   });
 
   return router;

@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 
 function createTextRouter() {
   const textRouter = express.Router();
+  const textFactory = createTextFactory();
 
   textRouter.use(express.static(path.join(__dirname, getUploadFolderPath()))); // no se como redirigir esto a uploads fuera de esta carpeta
 
@@ -26,7 +27,6 @@ function createTextRouter() {
     }
 
     try {
-      const textFactory = createTextFactory();
       const text = await textFactory.createText(info);
       res.status(201).json(text);
     } catch (error) {

@@ -1,13 +1,17 @@
 import createServer from "../src/shared/server/server.js";
-import { crearClienteRest } from "./ClienteRest.js";
+import axios from "axios";
 
 const port = 3000;
+const urlAuth = `http://localhost:${port}/users`
 const server = await createServer(port);
-const cliente = crearClienteRest({
-  url: `http://localhost:${port}/users`,
-});
 
-const { data } = await cliente.autorizar(1);
+// Autorizo al usuario con id 0
+try {
+const { data } = await axios.post(urlAuth, { id: 0 });
 console.log(data);
+} catch (err) {
+  console.log("error auth", err)
+}
+
 
 server.close();
