@@ -1,10 +1,12 @@
+import { getDevHost } from "../../config.js";
+
 function createFileDao() {
   const files = [];
 
   return {
     add: async (file) => {
       files.push(file);
-      const urlPdf = `${process.env.DEV_HOST}/${file.originalname}`;
+      const urlPdf = `${getDevHost()}/${file.originalname}`;
       return urlPdf;
     },
   };

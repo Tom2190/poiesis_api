@@ -1,14 +1,13 @@
-import createMailer from './mailer.js'
-import dotenv from 'dotenv'
+import createMailer from "./mailer.js";
+import { getMailerInfo } from "../../config.js";
+const mailerInfo = getMailerInfo();
+const service = mailerInfo.service;
+const user = mailerInfo.user;
+const pass = mailerInfo.pass;
 
-dotenv.config()
-const service = process.env.SERVICE
-const user = process.env.USER
-const pass = process.env.PASS
-
-async function createMailerFactory () {
-    const mailer = await createMailer(service,user,pass)
-    return mailer
+async function createMailerFactory() {
+  const mailer = await createMailer(service, user, pass);
+  return mailer;
 }
 
-export default createMailerFactory
+export default createMailerFactory;

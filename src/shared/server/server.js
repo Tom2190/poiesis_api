@@ -3,9 +3,6 @@ import createUserRouter from "../../User/routers/userRouter.js";
 import createSignUpRouter from "../../User/routers/signUpRouter.js";
 import createTextRouter from "../../Text/routers/textRouter.js";
 
-import dotenv from "dotenv";
-dotenv.config();
-
 async function createServer(port) {
   const app = express();
   app.use(express.json());

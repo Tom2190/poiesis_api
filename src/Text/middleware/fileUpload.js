@@ -1,9 +1,10 @@
 import multer from "multer";
 import util from "util";
+import { getUploadFolderPath } from "../../config.js";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./src/Text/uploads");
+    cb(null, getUploadFolderPath());
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

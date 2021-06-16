@@ -5,13 +5,14 @@ import createTextFactory from "../business/createTextFactory.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { getUploadFolderPath } from "../../config.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function createTextRouter() {
   const textRouter = express.Router();
 
-  textRouter.use(express.static(path.join(__dirname, "uploads"))); // no se como redirigir esto a uploads fuera de esta carpeta
+  textRouter.use(express.static(path.join(__dirname, getUploadFolderPath()))); // no se como redirigir esto a uploads fuera de esta carpeta
 
   textRouter.post("/", verifyToken, upload, async (req, res, next) => {
     const info = { textData: req.body };

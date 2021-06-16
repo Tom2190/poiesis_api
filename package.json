@@ -6,7 +6,8 @@
   "main": "src/main.js",
   "scripts": {
     "start": "nodemon ./src/main.js",
-    "test": "node ./test/testCUMailer.js"
+    "test": "node ./test/testCUMailer.js",
+    "testCreateText": "node ./test/Text/index.js"
   },
   "keywords": [],
   "author": "",
