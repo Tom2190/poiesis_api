@@ -1,6 +1,6 @@
 import express from "express";
 import upload from "../middleware/fileUpload.js";
-import { verifyToken } from "../../compartido/jwt/jwt.js";
+import { verifyToken } from "../../shared/jwt/jwt.js";
 import createTextFactory from "../business/createTextFactory.js";
 
 import path from "path";

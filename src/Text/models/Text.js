@@ -1,5 +1,5 @@
-import { isEmpty } from "../../compartido/utils/index.js";
-import createErrorFactory from "../../compartido/errors/ErrorFactory.js";
+import { isEmpty } from "../../shared/utils/index.js";
+import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
 /**
  * TEXTO

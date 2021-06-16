@@ -1,5 +1,5 @@
-import crearNewText from "./Text.js";
-import createErrorFactory from "../../compartido/errors/ErrorFactory.js";
+import crearNewText from "../models/Text.js";
+import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 import fs from "fs";
 
 function createText(userDao, textDao, fileDao) {

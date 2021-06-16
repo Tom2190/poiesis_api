@@ -1,13 +1,13 @@
-import { crearServidor } from '../src/compartido/servidor/servidor.js'
-import { crearClienteRest } from './ClienteRest.js'
+import createServer from "../src/shared/server/server.js";
+import { crearClienteRest } from "./ClienteRest.js";
 
-const port = 3000
-const servidor = await crearServidor(port)
+const port = 3000;
+const server = await createServer(port);
 const cliente = crearClienteRest({
-  url: `http://localhost:${port}/usuarios`
-})
+  url: `http://localhost:${port}/usuarios`,
+});
 
-const { data } = await cliente.autorizar(1)
-console.log(data)
+const { data } = await cliente.autorizar(1);
+console.log(data);
 
-servidor.close()
+server.close();

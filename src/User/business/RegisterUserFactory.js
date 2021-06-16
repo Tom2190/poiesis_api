@@ -1,7 +1,7 @@
-import createUserDao from '../persistence/userDao.js'
-import createEmailTextDao from '../persistence/emailTextDao.js'
-import createMailerFactory from '../../compartido/mailer/MailerFactory.js'
-import createRegisterUser from '../business/registerUser.js'
+import createUserDao from "../persistence/userDao.js";
+import createEmailTextDao from "../persistence/emailTextDao.js";
+import createMailerFactory from "../../shared/mailer/MailerFactory.js";
+import createRegisterUser from "../business/registerUser.js";
 
 const daoUsers = createUserDao();
 const daoEmailTexts = createEmailTextDao();
@@ -12,4 +12,4 @@ function createRegisterUserFactory() {
   return registerUser;
 }
 
-export default createRegisterUserFactory
+export default createRegisterUserFactory;

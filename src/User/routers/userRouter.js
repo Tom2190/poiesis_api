@@ -1,23 +1,22 @@
-import express from 'express'
-import createAuthUserFactory from '../business/authUserFactory'
+import express from "express";
+import createAuthUserFactory from "../business/authUserFactory.js";
 
 function createUserRouter() {
-  
-  const router = express.Router()
-  
-  router.post('/', async (req, res) => {
+  const router = express.Router();
+
+  router.post("/", async (req, res) => {
     try {
-      const authUserFactory = createAuthUserFactory()
-      await authUserFactory.authUser(req.body.id)
-      res.json({ msg: 'ok' })
+      const authUserFactory = createAuthUserFactory();
+      await authUserFactory.authUser(req.body.id);
+      res.json({ msg: "ok" });
     } catch (error) {
       next(error);
     }
-  })
+  });
 
   router.use((error, req, res, next) => {
     // TO DO
-/*     if (error.type === 'ERROR_DNI_EN_USO') {
+    /*     if (error.type === 'ERROR_DNI_EN_USO') {
       res.status(400)
     } else if (error.type === 'ERROR_DATOS_INVALIDOS') {
       res.status(400)
@@ -26,10 +25,10 @@ function createUserRouter() {
     } else {
       res.status(500)
     } */
-    res.status(400).json({ message: error.message })
-  })
+    res.status(400).json({ message: error.message });
+  });
 
-  return router
+  return router;
 }
 
-export default createUserRouter
+export default createUserRouter;

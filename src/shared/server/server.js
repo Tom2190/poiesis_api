@@ -18,7 +18,7 @@ async function createServer(port) {
     const server = app
       .listen(port)
       .once("error", () => {
-        reject(new Error("Error al conectarse al servidor"));
+        reject(new Error("Error al conectarse al server"));
       })
       .once("listening", () => {
         server.port = server.address().port;
