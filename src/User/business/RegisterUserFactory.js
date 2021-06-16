@@ -5,7 +5,7 @@ import createRegisterUser from "../business/registerUser.js";
 
 const daoUsers = createUserDao();
 const daoEmailTexts = createEmailTextDao();
-const mailer = createMailerFactory();
+const mailer = await createMailerFactory();
 
 function createRegisterUserFactory() {
   const registerUser = createRegisterUser(daoUsers, daoEmailTexts, mailer);
