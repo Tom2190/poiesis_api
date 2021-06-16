@@ -1,7 +1,6 @@
 import nodemailer from 'nodemailer'
 
 async function createMailer(service, user, pass) {
-
     return {
         send: async (texto, to, subject) => {
             let transporter = nodemailer.createTransport({
