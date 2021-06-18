@@ -1,8 +1,8 @@
-import firebaseDb from './firebase.js'
+import createRegisterUserFactory from '../../User/business/RegisterUserFactory.js';
 
 const testUser = {
-    name: "Tomás",
-    lastName: "Fernández",
+    name: "Josesito",
+    lastName: "Dominguez",
     email: "fernandez.abrevaya@gmail.com",
     password: "123456",
     chosenDateTime: "Martes y Jueves",
@@ -12,4 +12,10 @@ const testUser = {
     dni: "12345678"
 }
 
-firebaseDb.collection('users').add(testUser)
+const factory = createRegisterUserFactory()
+try {
+    const user = await factory.registerUser(testUser);
+    console.log(user);
+} catch (error) {
+    console.log(error);
+}

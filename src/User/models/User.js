@@ -4,9 +4,7 @@ import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 import { createDni } from "./Dni.js";
 import { createEmail } from "./Email.js";
 
-let nextId = 1;
-
-function createUser(data, id = null) {
+function createUser(data) {
   const errorFactory = createErrorFactory();
   const user = {};
 
@@ -67,14 +65,6 @@ function createUser(data, id = null) {
     errorFactory.createInvalidDataError("Falta el dni");
   }
   user.dni = createDni(data.dni);
-
-  if (id) {
-    user.id = Number(id);
-  } else if (!isNaN(Number(data.id))) {
-    user.id = Number(data.id);
-  } else {
-    user.id = nextId++;
-  }
 
   user.shareTexts = false;
 
