@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "nodemon ./src/main.js",
-    "testAuthMailer": "node ./test/Tomas/testCUMailer.js",
+    "testAuthMailer": "node ./test/Tomas/testAuthFirebase.js",
     "testCreateText": "node ./test/Priscila/index.js",
     "testTextsByPage": "mocha ./test/Adela/textByPage.test.js",
     "testRegisterUser": "node ./test/Alex/CURegisterUser.test.js"

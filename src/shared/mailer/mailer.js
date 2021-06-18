@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 
 async function createMailer(service, user, pass) {
     return {
-        send: async (texto, to, subject) => {
+        send: async (text, to, subject) => {
             let transporter = nodemailer.createTransport({
                 service: service,
                 auth: {
@@ -15,7 +15,7 @@ async function createMailer(service, user, pass) {
                 from: 'escritura.poiesis@gmail.com',
                 to: to,
                 subject: subject,
-                text: texto
+                text: text
             })
             console.log("Email Sent");
         }

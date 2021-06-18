@@ -1,5 +1,5 @@
 /*
-  Author: Tomas Fernandez Abrevaya
+  Author: Tomás Fernández Abrevaya
 */
 import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
@@ -14,7 +14,7 @@ function createAuthUser(dao, mailer, daoEmailsTexts) {
       if (!result) {
         errorFactory.createUserNotFoundError("No se pudo encontrar al usuario");
       }
-      const dataEmail = daoEmailsTexts.getDataText(emailCode);
+      const dataEmail = await daoEmailsTexts.getDataText(emailCode);
       await mailer.send(dataEmail.text, user.email, dataEmail.subject);
     },
   };
