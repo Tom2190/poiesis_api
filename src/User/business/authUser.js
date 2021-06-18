@@ -1,4 +1,6 @@
-//Errors
+/*
+  Author: Tomas Fernandez Abrevaya
+*/
 import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
 function createAuthUser(dao, mailer, daoEmailsTexts) {

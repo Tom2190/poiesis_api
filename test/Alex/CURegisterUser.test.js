@@ -1,4 +1,4 @@
-import createServer from "../src/shared/server/server.js";
+import createServer from "../../src/shared/server/server.js";
 import axios from 'axios'
 
 const PORT = 3000;

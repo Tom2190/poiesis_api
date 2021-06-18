@@ -1,5 +1,7 @@
+/*
+  Author: Alex Costa
+*/
 import createUser from "../Models/User.js";
-//Errors
 import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
 function createRegisterUser(daoUsers, daoEmailText, mailer) {

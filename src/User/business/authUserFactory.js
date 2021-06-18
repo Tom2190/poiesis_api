@@ -1,3 +1,6 @@
+/*
+  Author: Tomas Fernandez Abrevaya
+*/
 import createUserDao from "../persistence/userDao.js";
 import createEmailTextDao from "../persistence/emailTextDao.js";
 import createMailerFactory from "../../shared/mailer/MailerFactory.js";

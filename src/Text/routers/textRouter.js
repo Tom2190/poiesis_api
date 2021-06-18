@@ -2,6 +2,8 @@ import express from "express";
 import upload from "../middleware/fileUpload.js";
 import { verifyToken } from "../../shared/jwt/jwt.js";
 import createTextFactory from "../business/createTextFactory.js";
+import createTextsByPageFactory from "../business/getTextByPageFactory.js";
+
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,6 +14,7 @@ const __dirname = path.dirname(__filename);
 function createTextRouter() {
   const textRouter = express.Router();
   const textFactory = createTextFactory();
+  const getTextByPageFactory = createTextsByPageFactory();
 
   textRouter.use(express.static(path.join(__dirname, getUploadFolderPath()))); // no se como redirigir esto a uploads fuera de esta carpeta
 
@@ -33,6 +36,21 @@ function createTextRouter() {
       next(error);
     }
   });
+
+  textRouter.get('/', async (req, res, next) => {
+    try {
+      const page = parseInt(req.query.page);
+      const genre = req.query.genre;
+      const paginatedTexts = getTextByPageFactory.search(page, genre);
+      res.json({
+        page,
+        content: paginatedTexts
+      });
+
+    } catch (err) {
+      next(err)
+    }
+  })
 
   textRouter.use((error, req, res, next) => {
     if (error.code == "LIMIT_FILE_SIZE") {

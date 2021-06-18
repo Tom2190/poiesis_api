@@ -9,7 +9,7 @@ function createUserDao() {
     writingFrecuency: "Alta",
     writingGenre: "Ficción",
     phone: "1123318739",
-    dni: "43820248",
+    dni: "12345678",
     id: 0
   }
   users.push(testUser)
