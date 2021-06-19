@@ -1,13 +1,11 @@
-import { getDevHost } from "../../config.js";
-
-function createFileDao() {
-  const files = [];
-
+function createFileDao(driveFunctions) {
   return {
     add: async (file) => {
-      files.push(file);
-      const urlPdf = `${getDevHost()}/${file.originalname}`;
-      return urlPdf;
+      await driveFunctions.uploadFile(file);
+
+      // files.push(file);
+      // const urlPdf = `${getDevHost()}/${file.originalname}`;
+      return `www.google.com`;
     },
   };
 }

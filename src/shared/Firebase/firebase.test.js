@@ -1,18 +1,18 @@
-import createRegisterUserFactory from '../../User/business/RegisterUserFactory.js';
-import createUserDaoFactory from '../../User/persistence/userDaoFactory.js';
-import firebaseDb from './firebase.js';
+import createRegisterUserFactory from "../../User/business/RegisterUserFactory.js";
+import createUserDaoFactory from "../../User/persistence/userDaoFactory.js";
+import { firebaseDb } from "./firebase.js";
 
 const testUser = {
-    name: "Josesito",
-    lastName: "Dominguez",
-    email: "fernandez.abrevaya@gmail.com",
-    password: "123456",
-    chosenDateTime: "Martes y Jueves",
-    writingFrecuency: "Alta",
-    writingGenre: "Ficción",
-    phone: "1123318739",
-    dni: "12345678"
-}
+  name: "Josesito",
+  lastName: "Dominguez",
+  email: "fernandez.abrevaya@gmail.com",
+  password: "123456",
+  chosenDateTime: "Martes y Jueves",
+  writingFrecuency: "Alta",
+  writingGenre: "Ficción",
+  phone: "1123318739",
+  dni: "12345678",
+};
 
 //===========TEST REGISTER USER==============
 /* const factory = createRegisterUserFactory()
@@ -30,8 +30,6 @@ allUsers.forEach(async user => {
     await firebaseDb.collection('users').doc(user.id).delete();
 })
 console.log("Borrados..."); */
-
-
 
 //=============TEST UPDATE USER======================
 /* const daoUsers = createUserDaoFactory();

@@ -1,4 +1,4 @@
-function createTextDao(firebaseDb) {
+function createTextDao() {
   const texts = [
     { id: 1, title: "ejemplo1", genre: "ficcion" },
     { id: 2, title: "ejemplo2", genre: "ficcion" },
@@ -34,24 +34,18 @@ function createTextDao(firebaseDb) {
 
   return {
     addUnique: async (textData) => {
-      const collection = await firebaseDb.collection("texts").get();
-      const validateText = collection.docs.some((doc) => {
-        const text = { ...doc.data() };
-        return text.title === textData.title;
+      const exists = texts.some((e) => {
+        return e.title === textData.title;
       });
-      if (validateText) {
-        return null;
+      if (exists) {
+        return { added: 0 };
       } else {
-        return await firebaseDb.collection("texts").add(textData);
+        texts.push(textData);
+        return { added: 1 };
       }
     },
     getAllByUser: async ({ userId }) => {
-      const collection = await firebaseDb.collection("texts").get();
-      const textsByUser = collection.docs.filter((doc) => {
-        const text = { ...doc.data() };
-        return text.userId === userId;
-      });
-      return textsByUser;
+      return texts.filter((txt) => txt.userId === userId);
     },
     getByGenre: (page, selectedGenre) => {
       const textsToShowByPage = 9;

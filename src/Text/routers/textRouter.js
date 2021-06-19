@@ -34,7 +34,7 @@ function createTextRouter() {
       const text = await textFactory.createText(info);
       res.status(201).json(text);
     } catch (error) {
-      console.log(error.message);
+      console.log("ERRPR", error.message);
       next(error);
     }
   });

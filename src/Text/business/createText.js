@@ -16,6 +16,7 @@ function createText(userDao, textDao, fileDao) {
 
       let newText = crearNewText(textData);
       const fileUrl = await fileDao.add(file);
+
       newText = { ...newText, urlPdf: fileUrl };
       const createdText = await textDao.addUnique(newText);
       if (!createdText) {
