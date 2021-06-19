@@ -1,14 +1,14 @@
 /*
   Author: Tomás Fernández Abrevaya
 */
-import createUserDao from "../persistence/userDao.js";
-import createEmailTextDao from "../persistence/emailTextDao.js";
-import createMailerFactory from "../../shared/mailer/MailerFactory.js";
 import createAuthUser from "./authUser.js";
+import createEmailTextDao from "../persistence/emailTextDao.js";
+import createUserDaoFactory from "../persistence/userDaoFactory.js";
+import createMailerFactory from "../../shared/mailer/MailerFactory.js";
 
-const mailer = await createMailerFactory();
-const userDao = createUserDao();
+const userDao = createUserDaoFactory();
 const emailTextDao = createEmailTextDao();
+const mailer = await createMailerFactory();
 
 function createAuthUserFactory() {
   const authFactory = createAuthUser(userDao, mailer, emailTextDao);

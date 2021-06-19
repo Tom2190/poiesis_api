@@ -1,12 +1,12 @@
 /*
   Author: Alex Costa
 */
-import createUserDao from "../persistence/userDao.js";
-import createEmailTextDao from "../persistence/emailTextDao.js";
-import createMailerFactory from "../../shared/mailer/MailerFactory.js";
 import createRegisterUser from "../business/registerUser.js";
+import createEmailTextDao from "../persistence/emailTextDao.js";
+import createUserDaoFactory from "../persistence/userDaoFactory.js";
+import createMailerFactory from "../../shared/mailer/MailerFactory.js";
 
-const daoUsers = createUserDao();
+const daoUsers = createUserDaoFactory();
 const daoEmailTexts = createEmailTextDao();
 const mailer = await createMailerFactory();
 

@@ -10,7 +10,7 @@ function createRegisterUser(daoUsers, daoEmailText, mailer) {
   return {
     registerUser: async (userData) => {
       const user = createUser(userData);
-      const {id} = await daoUsers.add(user);
+      const id = await daoUsers.add(user);
       if (!id) {
         errorFactory.createUserNotFoundError(
           "Ya existe un usuario con ese email y/o dni"

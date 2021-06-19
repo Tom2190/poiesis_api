@@ -1,20 +1,15 @@
-import firebaseDb from "../../shared/Firebase/firebase.js";
-
-function createUserDao() {
+function createUserDao(firebaseDb) {
   return {
     add: async (user) => {
       const collection = await firebaseDb.collection('users').get();
-      const validateUser = collection.forEach(doc => {
+      const validateUser = collection.docs.some(doc => {
           const newUser = { ...doc.data(), id: doc.id }
-          if(user.email.toLowerCase() === newUser.email.toLowerCase() || user.dni===newUser.dni){
-            return newUser
-          }
+          return user.email.toLowerCase() === newUser.email.toLowerCase() || user.dni===newUser.dni
       });
       if (validateUser) {
-        // TO DO, DEFINIR QUE DEVOLVER SI EL USUARIO YA EXISTE
-        return 'NO_ID';
+        return null;
       }
-      return await firebaseDb.collection('users').add(user);
+      return (await firebaseDb.collection('users').add(user)).id;
     },
     getById: async (id) => {
       const doc = await firebaseDb.collection("users").doc(id).get();

@@ -19,16 +19,11 @@ function createSignUpRouter() {
   });
 
   signUpRouter.use((error, req, res, next) => {
-    //TO DO
-    /*     if (error.type === 'ERROR_DNI_EN_USO') {
-      res.status(400)
-    } else if (error.type === 'ERROR_DATOS_INVALIDOS') {
-      res.status(400)
-    } else if (error.type === 'ERROR_ESTUDIANTE_NO_ENCONTRADO') {
-      res.status(404)
+    if (error.type === 'USER_NOT_FOUND_ERROR' || error.type === 'INVALID_DATA_ERROR') {
+      res.status(403);
     } else {
-      res.status(500)
-    } */
+      res.status(500);
+    }
     res.json({ message: error.message });
   });
 
