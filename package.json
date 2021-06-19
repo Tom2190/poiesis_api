@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "autorizar_usuario",
+  "name": "poiesis_api",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
