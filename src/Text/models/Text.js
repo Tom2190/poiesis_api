@@ -35,7 +35,7 @@ function crearNewText(data, textId = null) {
     text.genre = data.genre;
   }
 
-  if (data.hasPdf && data.containsFile) {
+  if (data.hasPdf && !data.containsFile) {
     errorFactory.createInvalidDataError("pdf no adjuntado");
   }
 

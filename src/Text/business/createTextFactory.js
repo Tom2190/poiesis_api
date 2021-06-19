@@ -1,13 +1,13 @@
 /*
   Author: Priscila Bey
 */
-import createUserDao from "../../User/persistence/userDao.js";
+import createUserDaoFactory from "../../User/persistence/userDaoFactory.js";
 import createTextDao from "../persistence/textDao.js";
 import createFileDao from "../persistence/fileDao.js";
 import createText from "./createText.js";
 
 function createTextFactory() {
-  const userDao = createUserDao();
+  const userDao = createUserDaoFactory();
   const textDao = createTextDao();
   const fileDao = createFileDao();
 

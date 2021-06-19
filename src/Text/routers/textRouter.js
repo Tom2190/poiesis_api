@@ -4,19 +4,20 @@ import { verifyToken } from "../../shared/jwt/jwt.js";
 import createTextFactory from "../business/createTextFactory.js";
 import createTextsByPageFactory from "../business/getTextByPageFactory.js";
 
-
 import path from "path";
 import { fileURLToPath } from "url";
-import { getUploadFolderPath } from "../../config.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import { getUploadFolderPath } from "../../config.js";
 
 function createTextRouter() {
   const textRouter = express.Router();
   const textFactory = createTextFactory();
   const getTextByPageFactory = createTextsByPageFactory();
 
-  textRouter.use(express.static(path.join(__dirname, getUploadFolderPath()))); // no se como redirigir esto a uploads fuera de esta carpeta
+  textRouter.use(
+    express.static(path.join(__dirname, `../../../${getUploadFolderPath()}`))
+  );
 
   textRouter.post("/", verifyToken, upload, async (req, res, next) => {
     const info = { textData: req.body };
@@ -33,24 +34,24 @@ function createTextRouter() {
       const text = await textFactory.createText(info);
       res.status(201).json(text);
     } catch (error) {
+      console.log(error.message);
       next(error);
     }
   });
 
-  textRouter.get('/', async (req, res, next) => {
+  textRouter.get("/", async (req, res, next) => {
     try {
       const page = parseInt(req.query.page);
       const genre = req.query.genre;
       const paginatedTexts = getTextByPageFactory.search(page, genre);
       res.json({
         page,
-        content: paginatedTexts
+        content: paginatedTexts,
       });
-
     } catch (err) {
-      next(err)
+      next(err);
     }
-  })
+  });
 
   textRouter.use((error, req, res, next) => {
     if (error.code == "LIMIT_FILE_SIZE") {

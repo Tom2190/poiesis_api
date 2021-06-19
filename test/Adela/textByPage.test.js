@@ -13,7 +13,7 @@ const primeros9Ficcion = {
     { id: 6, nombretexto: "ejemplo6", genre: "ficcion" },
     { id: 7, nombretexto: "ejemplo7", genre: "ficcion" },
     { id: 8, nombretexto: "ejemplo8", genre: "ficcion" },
-    { id: 9, nombretexto: "ejemplo9", genre: "ficcion" }
+    { id: 9, nombretexto: "ejemplo9", genre: "ficcion" },
   ],
 };
 
@@ -43,58 +43,65 @@ const primeros9Poesia = {
     { id: 26, nombretexto: "ejemplo26", genre: "poesia" },
     { id: 27, nombretexto: "ejemplo27", genre: "poesia" },
     { id: 28, nombretexto: "ejemplo28", genre: "poesia" },
-    { id: 29, nombretexto: "ejemplo29", genre: "poesia" }
+    { id: 29, nombretexto: "ejemplo29", genre: "poesia" },
   ],
 };
 
 const pagina2Poesia = {
   page: 2,
-  content: [
-    { id: 30, nombretexto: "ejemplo30", genre: "poesia" }],
+  content: [{ id: 30, nombretexto: "ejemplo30", genre: "poesia" }],
 };
 
-const errorStatus = 403
+const errorStatus = 403;
 
 let server;
 
 describe("server", () => {
   beforeEach(async () => {
-    server = await createServer({ port: 3000 });
+    server = await createServer({ port: 8080 });
   });
 
   afterEach(() => {
-    server.close()
+    server.close();
   });
 
   describe("get paginated", () => {
-
     it("trae los 9 primeros del género ficción", async () => {
-      const res = await axios.get("http://localhost:3000/texts?page=1&genre=ficcion");
+      const res = await axios.get(
+        "http://localhost:8080/texts?page=1&genre=ficcion"
+      );
       assert.deepStrictEqual(res.data, primeros9Ficcion);
     });
 
     it("trae los 9 primeros del género no ficción", async () => {
-      const res = await axios.get("http://localhost:3000/texts?page=1&genre=no_ficcion");
+      const res = await axios.get(
+        "http://localhost:8080/texts?page=1&genre=no_ficcion"
+      );
       assert.deepStrictEqual(res.data, primeros9NoFiccion);
     });
 
     it("trae los 9 primeros del género poesia", async () => {
-      const res = await axios.get("http://localhost:3000/texts?page=1&genre=poesia");
+      const res = await axios.get(
+        "http://localhost:8080/texts?page=1&genre=poesia"
+      );
       assert.deepStrictEqual(res.data, primeros9Poesia);
     });
 
     it("trae poesia número 10 (en página 2)", async () => {
-      const res = await axios.get("http://localhost:3000/texts?page=2&genre=poesia");
+      const res = await axios.get(
+        "http://localhost:8080/texts?page=2&genre=poesia"
+      );
       assert.deepStrictEqual(res.data, pagina2Poesia);
     });
 
     it("trae los 9 primeros del género drama (error)", async () => {
       try {
-        const res = await axios.get("http://localhost:3000/texts?page=1&genre=drama");
+        const res = await axios.get(
+          "http://localhost:8080/texts?page=1&genre=drama"
+        );
       } catch (error) {
         assert.deepStrictEqual(error.response.status, errorStatus);
       }
     });
   });
 });
-
