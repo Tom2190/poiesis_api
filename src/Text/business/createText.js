@@ -16,12 +16,15 @@ function createText(userDao, textDao, fileDao) {
       }
 
       let newText = crearNewText(textData);
-      const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
 
-      const fileId = await fileDao.add(fileName, tempFilePath);
-      const fileUrl = await fileDao.getFileUrl(fileId);
+      if (tempFilePath) {
+        const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
+        const fileId = await fileDao.add(fileName, tempFilePath);
+        const fileUrl = await fileDao.getFileUrl(fileId);
+        newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
+        fs.unlinkSync(tempFilePath);
+      }
 
-      newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
       const createdTextId = await textDao.addUnique(newText);
 
       if (!createdTextId) {
@@ -29,7 +32,6 @@ function createText(userDao, textDao, fileDao) {
           "El texto que desea agregar ya existe con ese titulo"
         );
       }
-      fs.unlinkSync(tempFilePath);
       return { ...newText, id: createdTextId };
     },
   };
