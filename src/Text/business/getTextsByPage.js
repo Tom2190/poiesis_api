@@ -9,14 +9,14 @@ function getTextsByPage(textDao) {
   const errorFactory = createErrorFactory();
 
   return ({
-    search: (page, selectedGenre) => {
-      const allowedGenre = ["ficcion", "no_ficcion", "poesia"];
+    search: async(page, selectedGenre) => {
+      const allowedGenre = ["fiction", "non_fiction", "poetry"];
       if (!allowedGenre.includes(selectedGenre)) {
         errorFactory.createInvalidDataError(
-          "el genero que intenta crear no existe"
+          "El genero que intenta buscar no existe"
         );
       }
-      return textDao.getByGenre(page, selectedGenre);
+      return await textDao.getByGenre(page, selectedGenre);
     }
   })
 }
