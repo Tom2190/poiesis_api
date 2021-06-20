@@ -26,7 +26,6 @@ function createTextRouter() {
 
     if (req.file) {
       info.textData.containsFile = true;
-      info.file = req.file;
       info.tempFilePath = req.file.path;
     }
 
