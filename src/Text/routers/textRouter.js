@@ -42,7 +42,7 @@ function createTextRouter() {
     try {
       const page = parseInt(req.query.page);
       const genre = req.query.genre;
-      const paginatedTexts = getTextByPageFactory.search(page, genre);
+      const paginatedTexts = await getTextByPageFactory.search(page, genre);
       res.json({
         page,
         content: paginatedTexts,
