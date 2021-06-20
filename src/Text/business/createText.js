@@ -10,22 +10,26 @@ function createText(userDao, textDao, fileDao) {
   return {
     createText: async ({ textData, file, tempFilePath }) => {
       const user = await userDao.getById(textData.userId);
+      console.log("createText file", file);
       if (!user) {
         errorFactory.createUserNotFoundError("Usuario no identificado");
       }
 
       let newText = crearNewText(textData);
-      const fileUrl = await fileDao.add(file);
+      const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
+      console.log("fileName", fileName);
+      const fileUrl = await fileDao.add(fileName, tempFilePath);
 
       newText = { ...newText, urlPdf: fileUrl };
-      const createdText = await textDao.addUnique(newText);
-      if (!createdText) {
+      const createdTextId = await textDao.addUnique(newText);
+      console.log(createdTextId);
+      if (!createdTextId) {
         errorFactory.createDuplicateTextError(
           "El texto que desea agregar ya existe con ese titulo"
         );
       }
       fs.unlinkSync(tempFilePath);
-      return newText;
+      return { ...newText, id: createdTextId };
     },
   };
 }

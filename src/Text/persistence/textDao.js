@@ -35,14 +35,14 @@ function createTextDao(firebaseDb) {
   return {
     addUnique: async (textData) => {
       const collection = await firebaseDb.collection("texts").get();
-      const validateText = collection.docs.some((doc) => {
+      const exists = collection.docs.some((doc) => {
         const text = { ...doc.data() };
         return text.title === textData.title;
       });
-      if (validateText) {
+      if (exists) {
         return null;
       } else {
-        return await firebaseDb.collection("texts").add(textData);
+        return (await firebaseDb.collection("texts").add(textData)).id;
       }
     },
     getAllByUser: async ({ userId }) => {

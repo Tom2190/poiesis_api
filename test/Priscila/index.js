@@ -13,7 +13,7 @@ async function main() {
   const filePath = "./test/Priscila/fileToUpload/worksheetskindergarten.pdf";
   const form = new FormData();
   form.append("demo", fs.createReadStream(filePath));
-  form.append("title", "Un nuevo cuento");
+  form.append("title", "Un nuevo cuento 100");
   form.append("genre", "poesia");
   form.append("hasPdf", "true");
 
