@@ -154,9 +154,15 @@ Para levantar el proyecto es necesario:
 #### Response data 200:
 
 ```
-{
-  genre: 'fiction',
-  textsIds: '1, 2, 3, 4, 5, 6, 7, 8, 9'
+{  
+  content: Contenido5,
+  userId: 'FTlNPqZkYvQxwtMb0DBM',
+  title: 'Titulo5',
+  genre: 'poetry',
+  hasPdf: false,
+  urlPdf: '',
+  createdAt: { seconds: 1624311394, nanoseconds: 374000000},
+  id: 'tVnAk9Vcvjru6iTwlZRP'
 }
 ```
 ### Tests: 
@@ -165,4 +171,4 @@ Para levantar el proyecto es necesario:
 -Para ejecutar el archivo es necesario usar el comando `npm run testTextsByPage` en la terminal
 
 ### Posibles errores: 
--Si se selecciona un género inexistente lanza un error 403 (indica que el servidor ha entendido la petición, pero se niega a autorizarla.)
+-Si se selecciona un género inexistente lanza un error 400 (Bad Request, la petición no cumple con lo esperado)
