@@ -16,13 +16,13 @@ let nextId = 1;
 
 function crearNewText(data, textId = null) {
   const errorFactory = createErrorFactory();
-  const allowedGenre = ["ficcion", "no_ficcion", "poesia"];
+  const allowedGenre = ["fiction", "non_fiction", "poetry"];
   const text = {};
 
   text.userId = data.userId;
 
   if (!data.title) {
-    errorFactory.createInvalidDataError("falta el title");
+    errorFactory.createInvalidDataError("Falta el título");
   } else {
     text.title = data.title;
   }
@@ -43,7 +43,7 @@ function crearNewText(data, textId = null) {
     errorFactory.createInvalidDataError("este texto no tiene contenido");
   }
 
-  if (!data.hasPdf && !data.containsFile) {
+  if (!data.hasPdf && data.containsFile) {
     errorFactory.createInvalidDataError(
       "el texto que se intenta crear no deberia contener archivos adjuntos"
     );
@@ -59,7 +59,6 @@ function crearNewText(data, textId = null) {
 
   text.hasPdf = data.hasPdf;
   text.content = data.content || null;
-  text.urlPdf = null; // se agrega una vez subido el archivo al fileDao
 
   return text;
 }

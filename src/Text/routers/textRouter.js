@@ -33,7 +33,6 @@ function createTextRouter() {
       const text = await textFactory.createText(info);
       res.status(201).json(text);
     } catch (error) {
-      console.log("ERRPR", error.message);
       next(error);
     }
   });
@@ -56,11 +55,13 @@ function createTextRouter() {
     if (error.code == "LIMIT_FILE_SIZE") {
       res.status(400);
     } else if (error.type === "USER_NOT_FOUND_ERROR") {
-      res.status(403);
+      res.status(401);
     } else if (error.type === "DUPLICATE_TEXT_ERROR") {
       res.status(403);
     } else if (error.type === "INVALID_DATA_ERROR") {
-      res.status(403);
+      res.status(400);
+    } else if (error.type === "DATA_BASE_ERROR") {
+      res.status(500);
     } else {
       res.status(500);
     }

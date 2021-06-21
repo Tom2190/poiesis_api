@@ -12,16 +12,30 @@ function createText(userDao, textDao, fileDao) {
       const user = await userDao.getById(textData.userId);
 
       if (!user) {
+        if (tempFilePath) {
+          fs.unlinkSync(tempFilePath);
+        }
         errorFactory.createUserNotFoundError("Usuario no identificado");
       }
 
       let newText = crearNewText(textData);
-      const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
 
-      const fileId = await fileDao.add(fileName, tempFilePath);
-      const fileUrl = await fileDao.getFileUrl(fileId);
+      if (tempFilePath) {
+        try {
+          const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
+          const fileId = await fileDao.add(fileName, tempFilePath);
+          const fileUrl = await fileDao.getFileUrl(fileId);
+          newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
+        } catch (err) {
+          // TODO tirar error
+          errorFactory.createDataBaseError(
+            "Error en Drive al intentar subir el archivo"
+          );
+        } finally {
+          fs.unlinkSync(tempFilePath);
+        }
+      }
 
-      newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
       const createdTextId = await textDao.addUnique(newText);
 
       if (!createdTextId) {
@@ -29,7 +43,6 @@ function createText(userDao, textDao, fileDao) {
           "El texto que desea agregar ya existe con ese titulo"
         );
       }
-      fs.unlinkSync(tempFilePath);
       return { ...newText, id: createdTextId };
     },
   };

@@ -34,7 +34,7 @@ const first9Poetry = {genre:"poetry", textsIds:[
   'mweT292ZDlmuq9H5K1wk',
   'py5SNaoERV3LDOdRJMF7'
 ]}
-const errorStatus = 403;
+const errorStatus = 400;
 
 let server;
 
