@@ -66,7 +66,7 @@ function createUser(data) {
   }
   user.dni = createDni(data.dni);
 
-  user.shareTexts = false;
+  user.canShareTexts = false;
 
   return user;
 }

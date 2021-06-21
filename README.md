@@ -43,7 +43,7 @@ Para levantar el proyecto es necesario:
 
 | Nombre   |  Tipo  | Descripción                    |
 | -------- | :----: | ------------------------------ |
-| shareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
+| canShareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
 | id     |  String   | Id creado para el usuario desde firebase |
 
 ### Tests: 
@@ -56,7 +56,7 @@ Para levantar el proyecto es necesario:
 
 ### Descripción:
 
-- Al querer autorizar a un usuario, primero se lo buscará por su id, después se lo reemplazará por uno cuyo atributo shareTexts sea true. Desde este momento, podrá subir textos a la página.
+- Al querer autorizar a un usuario, primero se lo buscará por su id, después se le cambiará el atributo canShareTexts a true, y se hace el update. Desde este momento, podrá subir textos a la página.
 - Se le enviará un email al usuario autorizado que indique que ahora puede subir textos a la página.
 
 ### Endpoint: `POST /users`
@@ -73,7 +73,7 @@ Para levantar el proyecto es necesario:
   lastName: 'Fernández Abrevaya',
   email: 'escritura.poiesis@gmail.com',
   phone: '1123318739',
-  shareTexts: true,
+  canShareTexts: true,
   name: 'Tomás',
   dni: '35324852',
   writingFrecuency: 'Alta',
@@ -82,6 +82,12 @@ Para levantar el proyecto es necesario:
   id: '6CShT2kgKrqfbJ7maKbo'
 }
 ```
+- Campos extra:
+
+| Nombre   |  Tipo  | Descripción                    |
+| -------- | :----: | ------------------------------ |
+| canShareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
+| id     |  String   | Id creado para el usuario desde firebase |
 
 ### Tests: 
 - El archivo de test se encuentra en la ruta `./test/Tomas/authAxiosFirebase.test.js`

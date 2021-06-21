@@ -10,9 +10,8 @@ const userDao = createUserDaoFactory();
 const emailTextDao = createEmailTextDao();
 const mailer = await createMailerFactory();
 
-function createAuthUserFactory() {
-  const authFactory = createAuthUser(userDao, mailer, emailTextDao);
-  return authFactory;
+function createCUAuthUser() {
+  return createAuthUser(userDao, mailer, emailTextDao);
 }
 
-export default createAuthUserFactory;
+export default createCUAuthUser;

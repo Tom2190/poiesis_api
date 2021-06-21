@@ -1,13 +1,14 @@
 import express from "express";
-import createAuthUserFactory from "../business/authUserFactory.js";
+import createCUAuthUser from "../business/authUserFactory.js";
+
+const CUAuthUser = createCUAuthUser();
 
 function createUserRouter() {
   const router = express.Router();
-  const authUserFactory = createAuthUserFactory();
 
   router.post("/", async (req, res, next) => {
     try {
-      const updatedUser = await authUserFactory.authUser(req.body.id);
+      const updatedUser = await CUAuthUser.authUser(req.body.id);
       res.status(200).json(updatedUser)
     } catch (error) {
       next(error);
