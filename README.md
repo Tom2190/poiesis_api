@@ -10,6 +10,46 @@ Para levantar el proyecto es necesario:
 ## 1. Autenticación y creacion de usuarios
 *Por Alex Costa*
 
+### Descripción:
+
+- Se van a validar los datos del usuario.
+- En caso de no existir un usuario y que los datos sean validados correctamente se almacenara el usuario y se le enviara un mail confirmando su registración.
+
+### Endpoint: `POST /signup`
+
+#### Request:
+- Se deben enviar todos los datos requeridos del usuario en el cuerpo de la petición.
+
+| Nombre   |  Tipo  | Descripción                    |
+| -------- | :----: | ------------------------------ |
+| name     |  String   | Nombre del usuario |
+| lastName     |  String   | Apellido del usuario |
+| email     |  String   | Email del usuario, debe ser un email valido |
+| password   | String | Contraseña del usuario |
+| chosenDateTime   | String | Dia y horario elegido por el usuario |
+| writingFrequency   | String | Frecuencia de escritura del usuario |
+| writingGenre   | String | Genero de escritura del usuario |
+| phone   | String | Celular del usuario |
+| dni   | String | DNI del usuario |
+
+#### `201` Response data:
+
+```
+{
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwRVZ4ZVVacWJrcDdHM2VuQ0tjIiwiaWF0IjoxNjI0Mjg2NjI4fQ.NE06_k9FMVCJvp2bmcCu7tsvBO5YKTmoQwnJa4Rz1qQ'    
+}
+```
+- Campos extra:
+
+| Nombre   |  Tipo  | Descripción                    |
+| -------- | :----: | ------------------------------ |
+| shareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
+| id     |  String   | Id creado para el usuario desde firebase |
+
+### Tests: 
+- El archivo de test se encuentra en la ruta `./test/Alex/CURegisterUser.js`
+- Para ejecutar el archivo es necesario usar el comando `npm run testRegisterUser` en la terminal
+
 
 ## 2. Autorizacion y mailer
 *Por Tomás Fernández Abrevaya*
