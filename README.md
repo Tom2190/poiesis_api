@@ -43,7 +43,7 @@ Para levantar el proyecto es necesario:
 
 | Nombre   |  Tipo  | Descripción                    |
 | -------- | :----: | ------------------------------ |
-| canShareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
+| shareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
 | id     |  String   | Id creado para el usuario desde firebase |
 
 ### Tests: 
@@ -56,7 +56,7 @@ Para levantar el proyecto es necesario:
 
 ### Descripción:
 
-- Al querer autorizar a un usuario, primero se lo buscará por su id, después se le cambiará el atributo canShareTexts a true, y se hace el update. Desde este momento, podrá subir textos a la página.
+- Al querer autorizar a un usuario, primero se lo buscará por su id, después se lo reemplazará por uno cuyo atributo shareTexts sea true. Desde este momento, podrá subir textos a la página.
 - Se le enviará un email al usuario autorizado que indique que ahora puede subir textos a la página.
 
 ### Endpoint: `POST /users`
@@ -73,21 +73,15 @@ Para levantar el proyecto es necesario:
   lastName: 'Fernández Abrevaya',
   email: 'escritura.poiesis@gmail.com',
   phone: '1123318739',
-  canShareTexts: true,
+  shareTexts: true,
   name: 'Tomás',
   dni: '35324852',
-  writingFrequency: 'Alta',
+  writingFrecuency: 'Alta',
   chosenDateTime: 'Martes y Jueves',
   password: '123456',
   id: '6CShT2kgKrqfbJ7maKbo'
 }
 ```
-- Campos extra:
-
-| Nombre   |  Tipo  | Descripción                    |
-| -------- | :----: | ------------------------------ |
-| canShareTexts     |  boolean   | Determina si el usuario puede o no publicar textos |
-| id     |  String   | Id creado para el usuario desde firebase |
 
 ### Tests: 
 - El archivo de test se encuentra en la ruta `./test/Tomas/authAxiosFirebase.test.js`
@@ -147,3 +141,28 @@ Para levantar el proyecto es necesario:
 
 ## 4. Paginación y filtrado de textos
 *Por Adela Delgadillo*
+
+### Descripción:
+
+-Los usuarios van a poder ver la categoría de textos que les interese (ficción,no ficción, poesía), se mostrarán 9 por página.
+
+### Endpoint: `GET /texts`
+
+#### Request:
+-Se debe enviar el número de página con el contenido que se desea ver.
+
+#### Response data 200:
+
+```
+{
+  genre: 'fiction',
+  textsIds: '1, 2, 3, 4, 5, 6, 7, 8, 9'
+}
+```
+### Tests: 
+
+-El archivo de test se encuentra en la ruta `.test/Adela/textByPage.test.js`
+-Para ejecutar el archivo es necesario usar el comando `npm run testTextsByPage` en la terminal
+
+### Posibles errores: 
+-Si se selecciona un género inexistente lanza un error 403 (indica que el servidor ha entendido la petición, pero se niega a autorizarla.)
