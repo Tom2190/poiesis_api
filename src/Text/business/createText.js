@@ -12,17 +12,28 @@ function createText(userDao, textDao, fileDao) {
       const user = await userDao.getById(textData.userId);
 
       if (!user) {
+        if (tempFilePath) {
+          fs.unlinkSync(tempFilePath);
+        }
         errorFactory.createUserNotFoundError("Usuario no identificado");
       }
 
       let newText = crearNewText(textData);
 
       if (tempFilePath) {
-        const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
-        const fileId = await fileDao.add(fileName, tempFilePath);
-        const fileUrl = await fileDao.getFileUrl(fileId);
-        newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
-        fs.unlinkSync(tempFilePath);
+        try {
+          const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
+          const fileId = await fileDao.add(fileName, tempFilePath);
+          const fileUrl = await fileDao.getFileUrl(fileId);
+          newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
+        } catch (err) {
+          // TODO tirar error
+          errorFactory.createDataBaseError(
+            "Error en Drive al intentar subir el archivo"
+          );
+        } finally {
+          fs.unlinkSync(tempFilePath);
+        }
       }
 
       const createdTextId = await textDao.addUnique(newText);

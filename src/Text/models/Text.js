@@ -22,7 +22,7 @@ function crearNewText(data, textId = null) {
   text.userId = data.userId;
 
   if (!data.title) {
-    errorFactory.createInvalidDataError("falta el title");
+    errorFactory.createInvalidDataError("Falta el título");
   } else {
     text.title = data.title;
   }
