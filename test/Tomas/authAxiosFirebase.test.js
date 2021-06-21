@@ -2,7 +2,7 @@ import createServer from "../../src/shared/server/server.js";
 import axios from "axios";
 import createRegisterUserFactory from "../../src/User/business/RegisterUserFactory.js";
 
-const port = 8080;
+const port = 3000;
 const URL = `http://localhost:${port}/users`;
 const server = await createServer(port);
 const registerFactory = createRegisterUserFactory();

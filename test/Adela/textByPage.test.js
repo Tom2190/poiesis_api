@@ -49,7 +49,7 @@ let server;
 
 describe("server", () => {
   beforeEach(async () => {
-    server = await createServer({ port: 8080 });
+    server = await createServer({ port: 3000 });
   });
 
   afterEach(() => {
@@ -59,7 +59,7 @@ describe("server", () => {
   describe("get paginated", () => {
     it("trae los 9 primeros del género ficción", async () => {
       const res = await axios.get(
-        "http://localhost:8080/texts?page=1&genre=fiction"
+        "http://localhost:3000/texts?page=1&genre=fiction"
       );
       const textsIds = res.data.content
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -71,7 +71,7 @@ describe("server", () => {
 
     it("trae los 9 primeros del género no ficción", async () => {
       const res = await axios.get(
-        "http://localhost:8080/texts?page=1&genre=non_fiction"
+        "http://localhost:3000/texts?page=1&genre=non_fiction"
       );
       const textsIds = res.data.content
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -83,7 +83,7 @@ describe("server", () => {
 
     it("trae los 9 primeros del género poetry", async () => {
       const res = await axios.get(
-        "http://localhost:8080/texts?page=1&genre=poetry"
+        "http://localhost:3000/texts?page=1&genre=poetry"
       );
       const textsIds = res.data.content
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -96,7 +96,7 @@ describe("server", () => {
     it("trae los 9 primeros del género drama (error)", async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/texts?page=1&genre=drama"
+          "http://localhost:3000/texts?page=1&genre=drama"
         );
       } catch (error) {
         assert.deepStrictEqual(error.response.status, errorStatus);

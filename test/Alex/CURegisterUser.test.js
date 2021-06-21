@@ -1,7 +1,7 @@
 import createServer from "../../src/shared/server/server.js";
 import axios from "axios";
 
-const PORT = 8080;
+const PORT = 3000;
 const URL = `http://localhost:${PORT}/signup`;
 const server = await createServer(PORT);
 

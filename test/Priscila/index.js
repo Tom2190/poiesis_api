@@ -4,7 +4,7 @@ import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
 
-const PORT = 8080;
+const PORT = 3000;
 async function main() {
   await createServer({ port: PORT });
 
@@ -33,7 +33,7 @@ async function main() {
   try {
     const resPost = await axios({
       method: "post",
-      url: "http://localhost:8080/texts",
+      url: "http://localhost:3000/texts",
       data: form,
       headers: {
         "Content-Type": `multipart/form-data; boundary=${form._boundary}`,
