@@ -76,7 +76,7 @@ Para levantar el proyecto es necesario:
   canShareTexts: true,
   name: 'Tomás',
   dni: '35324852',
-  writingFrecuency: 'Alta',
+  writingFrequency: 'Alta',
   chosenDateTime: 'Martes y Jueves',
   password: '123456',
   id: '6CShT2kgKrqfbJ7maKbo'

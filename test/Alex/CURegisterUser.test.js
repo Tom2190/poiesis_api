@@ -11,7 +11,7 @@ const user = {
   email: "alexuniaoa28@gmail.com",
   password: "123456",
   chosenDateTime: "Martes y Jueves",
-  writingFrecuency: "Nada",
+  writingFrequency: "Nada",
   writingGenre: "Narrativo",
   phone: "1123318739",
   dni: "43844448",

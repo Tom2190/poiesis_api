@@ -39,12 +39,12 @@ function createUser(data) {
     user.chosenDateTime = data.chosenDateTime;
   }
 
-  if (!data.writingFrecuency) {
+  if (!data.writingFrequency) {
     errorFactory.createInvalidDataError(
       "Falta indicar la frecuencia de escritura"
     );
   } else {
-    user.writingFrecuency = data.writingFrecuency;
+    user.writingFrequency = data.writingFrequency;
   }
 
   if (!data.writingGenre) {

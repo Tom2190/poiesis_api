@@ -17,8 +17,7 @@ function createUserRouter() {
 
   router.use((error, req, res, next) => {
     if (
-      error.type === "USER_NOT_FOUND_ERROR" ||
-      error.type === "INVALID_DATA_ERROR"
+      error.type === "USER_NOT_FOUND_ERROR"
     ) {
       res.status(403);
     } else {
