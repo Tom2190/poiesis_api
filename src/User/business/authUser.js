@@ -14,8 +14,10 @@ function createAuthUser(dao, mailer, daoEmailsTexts) {
       if (!result) {
         errorFactory.createUserNotFoundError("No se pudo encontrar al usuario");
       }
+      console.log("Updated user")
       const dataEmail = await daoEmailsTexts.getDataText(emailCode);
       await mailer.send(dataEmail.text, user.email, dataEmail.subject);
+      return updatedUser
     },
   };
 }
