@@ -3,18 +3,16 @@ import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
 /**
  * TEXTO
- * idText: int
  * userId: string
  * title: string
  * genre: enum('fiction', 'non_fiction', 'poetry')
  * hasPdf: boolean
  * urlPdf?: string
  * content?: string
+ * createdAt: timestamp
  */
 
-let nextId = 1;
-
-function crearNewText(data, textId = null) {
+function crearNewText(data) {
   const errorFactory = createErrorFactory();
   const allowedGenre = ["fiction", "non_fiction", "poetry"];
   const text = {};
@@ -49,14 +47,7 @@ function crearNewText(data, textId = null) {
     );
   }
 
-  if (textId) {
-    text.textId = Number(textId);
-  } else if (!isNaN(Number(data.textId))) {
-    text.textId = Number(data.textId);
-  } else {
-    text.textId = nextId++;
-  }
-
+  text.createdAt = new Date();
   text.hasPdf = data.hasPdf;
   text.content = data.content || null;
 
