@@ -12,7 +12,7 @@ async function main() {
 
   const form = new FormData();
   // Datos en común
-  form.append("title", "Un nuevo cuento 109");
+  form.append("title", "Un nuevo cuento 111");
   form.append("genre", "poetry");
 
   /**
