@@ -23,9 +23,9 @@ function createTextDao(firebaseDb) {
       });
       return texts;
     },
-    getByGenre: async (page, selectedGenre) => {
+    getByGenre: async (page, selectedGenre,textsToShowByPage) => {
       const collection = await firebaseDb.collection("texts").get();
-      const textsToShowByPage = 9;
+     // const textsToShowByPage = 9;
       let paginatedTexts = [];
 
       collection.forEach((doc) => {

@@ -40,14 +40,20 @@ function createTextRouter() {
   });
 
   textRouter.get("/", async (req, res, next) => {
-    try {
-      const page = parseInt(req.query.page);
-      const genre = req.query.genre;
-      const paginatedTexts = await getTextByPageFactory.search(page, genre);
+    try {         
+      const paginatedTexts= await getTextByPageFactory.search(req.query); 
       res.json({
+        content: paginatedTexts,
+      })
+      /*
+        const page = parseInt(req.query.page);
+        const genre = req.query.genre;
+        const paginatedTexts = await getTextByPageFactory.search(page, genre);
+      
+        res.json({
         page,
         content: paginatedTexts,
-      });
+      });*/
     } catch (err) {
       next(err);
     }

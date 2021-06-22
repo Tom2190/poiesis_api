@@ -89,7 +89,6 @@ describe("server", () => {
       const textsIds = res.data.content
         .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .map((text) => text.id);
-
       assert.deepStrictEqual(textsIds, first9Poetry.textsIds);
       assert.deepStrictEqual(res.data.content[0].genre, first9Poetry.genre);
     });

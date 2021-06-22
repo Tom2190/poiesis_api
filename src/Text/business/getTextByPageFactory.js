@@ -6,9 +6,10 @@ import createTextDao from '../persistence/textDao.js'
 import { firebaseDb } from '../../shared/Firebase/firebase.js';
 
 const textDao = createTextDao(firebaseDb);
+const textsToShowByPage=9;
 
 function createTextsByPageFactory() {
-   const textByPage = getTextsByPage(textDao);
+   const textByPage = getTextsByPage(textDao,textsToShowByPage);
    return textByPage
 }
 
