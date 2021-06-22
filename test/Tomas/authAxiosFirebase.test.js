@@ -21,10 +21,14 @@ const testUser = {
 };
 
 try {
+  
   //Agrego al testUser a Firebase y mando email de confirmación
   const user = await registerFactory.registerUser(testUser);
-  //Autorizo al usuario a subior textos y mando email de confirmación
-  await axios.post(URL, { id: user.id });
+  
+  //Autorizo al usuario a subir textos y mando email de confirmación
+  const res = await axios.post(URL, { id: user.id });
+  console.log(res.data);
+  
 } catch (err) {
   console.log("error auth", err);
 }

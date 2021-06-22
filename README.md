@@ -69,17 +69,7 @@ Para levantar el proyecto es necesario:
 
 ```
 {
-  writingGenre: 'Ficción',
-  lastName: 'Fernández Abrevaya',
-  email: 'escritura.poiesis@gmail.com',
-  phone: '1123318739',
-  shareTexts: true,
-  name: 'Tomás',
-  dni: '35324852',
-  writingFrecuency: 'Alta',
-  chosenDateTime: 'Martes y Jueves',
-  password: '123456',
-  id: '6CShT2kgKrqfbJ7maKbo'
+ "Updated user"
 }
 ```
 

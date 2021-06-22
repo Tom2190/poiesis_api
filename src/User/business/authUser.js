@@ -9,12 +9,11 @@ function createAuthUser(dao, mailer, daoEmailsTexts) {
   return {
     authUser: async (idUser) => {
       const user = await dao.getById(idUser);
-      user.canShareTexts = true;
-      const result = await dao.update(user);
-      if (!result) {
+      if (!user) {
         errorFactory.createUserNotFoundError("No se pudo encontrar al usuario");
       }
-      console.log("Updated user")
+      user.canShareTexts = true;
+      await dao.update(user);
       const dataEmail = await daoEmailsTexts.getDataText(emailCode);
       await mailer.send(dataEmail.text, user.email, dataEmail.subject);
       return user

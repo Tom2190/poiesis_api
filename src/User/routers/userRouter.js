@@ -8,8 +8,8 @@ function createUserRouter() {
 
   router.post("/", async (req, res, next) => {
     try {
-      const updatedUser = await CUAuthUser.authUser(req.body.id);
-      res.status(200).json(updatedUser)
+      await CUAuthUser.authUser(req.body.id);
+      res.status(200).json({message: "Updated user"})
     } catch (error) {
       next(error);
     }
