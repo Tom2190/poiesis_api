@@ -15,26 +15,37 @@ function createTextDao(firebaseDb) {
     getAllByUser: async ({ userId }) => {
       let texts = [];
       const collection = await firebaseDb.collection("texts").get();
-      collection.forEach(doc => {
-        const text = { ...doc.data(), id: doc.id }
-        if(text.userId === userId){
+      collection.forEach((doc) => {
+        const text = { ...doc.data(), id: doc.id };
+        if (text.userId === userId) {
           texts.push(text);
         }
       });
-      return texts
+      return texts;
     },
-    getByGenre: async(page, selectedGenre) => {
+    getByGenre: async (page, selectedGenre) => {
       const collection = await firebaseDb.collection("texts").get();
       const textsToShowByPage = 9;
       let paginatedTexts = [];
 
-      collection.forEach(doc => {
-        const text = { ...doc.data(), id: doc.id }
-        if(text.genre === selectedGenre){
+      collection.forEach((doc) => {
+        // transformar firestore timestamp a Date
+        const date = doc.data().createdAt.toDate();
+        const text = {
+          ...doc.data(),
+          createdAt: date,
+          id: doc.id,
+        };
+        if (text.genre === selectedGenre) {
           paginatedTexts.push(text);
         }
       });
-      return [...paginatedTexts.slice(page * textsToShowByPage - textsToShowByPage,page * textsToShowByPage)];
+      return [
+        ...paginatedTexts.slice(
+          page * textsToShowByPage - textsToShowByPage,
+          page * textsToShowByPage
+        ),
+      ];
     },
   };
 }

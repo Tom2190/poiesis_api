@@ -12,23 +12,23 @@ async function main() {
 
   const form = new FormData();
   // Datos en común
-  form.append("title", "Un nuevo cuento 111");
-  form.append("genre", "poetry");
+  form.append("title", "Un nuevo cuento 5");
+  form.append("genre", "fiction");
 
   /**
    * Datos para textos sin pdf
    */
 
-  // form.append("hasPdf", "false");
-  // form.append("content", "lorem ipsum");
+  form.append("hasPdf", "false");
+  form.append("content", "lorem ipsum");
 
   /**
    * Datos para textos con pdf
    */
 
-  const filePath = "./test/Priscila/fileToUpload/worksheetskindergarten.pdf";
-  form.append("demo", fs.createReadStream(filePath));
-  form.append("hasPdf", "true");
+  // const filePath = "./test/Priscila/fileToUpload/worksheetskindergarten.pdf";
+  // form.append("demo", fs.createReadStream(filePath));
+  // form.append("hasPdf", "true");
 
   try {
     const resPost = await axios({

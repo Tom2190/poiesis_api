@@ -1,7 +1,7 @@
 import express from "express";
 import upload from "../middleware/fileUpload.js";
 import { verifyToken } from "../../shared/jwt/jwt.js";
-import createTextFactory from "../business/createTextFactory.js";
+import { createTextFactory } from "../business/createTextFactory.js";
 import createTextsByPageFactory from "../business/getTextByPageFactory.js";
 
 import path from "path";
@@ -10,10 +10,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import { getUploadFolderPath } from "../../config.js";
 
+const CU_CreateText = createTextFactory();
+const getTextByPageFactory = createTextsByPageFactory();
+
 function createTextRouter() {
   const textRouter = express.Router();
-  const textFactory = createTextFactory();
-  const getTextByPageFactory = createTextsByPageFactory();
 
   textRouter.use(
     express.static(path.join(__dirname, `../../../${getUploadFolderPath()}`))
@@ -30,9 +31,10 @@ function createTextRouter() {
     }
 
     try {
-      const text = await textFactory.createText(info);
+      const text = await CU_CreateText.createText(info);
       res.status(201).json(text);
     } catch (error) {
+      console.log("ERROR", error.message);
       next(error);
     }
   });

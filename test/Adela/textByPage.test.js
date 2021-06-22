@@ -11,8 +11,9 @@ const first9Fiction = {
     "I26OJXlHnzbBsiNeaVSR",
     "YjhWc8k6Wvy9KH9cceDe",
     "Zqsj76SOb82Ey5sYPbsG",
-    "wQnJR5qnJ2hkxyFhhGSk",
-    "zqLSVc821TQqHqqIfITh",
+    "I27nvd4g3yQqNCVhnIHk",
+    "IJRgkIWlzOG1oERYGLAT",
+    "AR5LtLWnZt2IC4rredgO",
   ],
 };
 const first9NonFiction = {
@@ -62,7 +63,7 @@ describe("server", () => {
         "http://localhost:3000/texts?page=1&genre=fiction"
       );
       const textsIds = res.data.content
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .map((text) => text.id);
 
       assert.deepStrictEqual(textsIds, first9Fiction.textsIds);
@@ -74,7 +75,7 @@ describe("server", () => {
         "http://localhost:3000/texts?page=1&genre=non_fiction"
       );
       const textsIds = res.data.content
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .map((text) => text.id);
 
       assert.deepStrictEqual(textsIds, first9NonFiction.textsIds);
@@ -86,7 +87,7 @@ describe("server", () => {
         "http://localhost:3000/texts?page=1&genre=poetry"
       );
       const textsIds = res.data.content
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .map((text) => text.id);
 
       assert.deepStrictEqual(textsIds, first9Poetry.textsIds);

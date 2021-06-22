@@ -25,7 +25,8 @@ function createText(userDao, textDao, fileDao) {
           const fileName = `${user.name}-${user.lastName}-${newText.title}.pdf`;
           const fileId = await fileDao.add(fileName, tempFilePath);
           const fileUrl = await fileDao.getFileUrl(fileId);
-          newText = { ...newText, pdfUrl: fileUrl, pdfFileId: fileId };
+          newText.pdfUrl = fileUrl;
+          newText.pdfFileId = fileId;
         } catch (err) {
           // TODO tirar error
           errorFactory.createDataBaseError(
