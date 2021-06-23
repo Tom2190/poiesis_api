@@ -19,7 +19,7 @@ function createUserRouter() {
     if (
       error.type === "USER_NOT_FOUND_ERROR"
     ) {
-      res.status(403);
+      res.status(404);
     } else {
       res.status(500);
     }

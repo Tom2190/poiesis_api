@@ -4,17 +4,17 @@
 
 import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
+const errorFactory = createErrorFactory();
+//En el factory, o no.
+const allowedGenre = ["fiction", "non_fiction", "poetry"];
 
 function getTextsByPage(textDao,textsToShowByPage) {
 
-  const errorFactory = createErrorFactory();
-
   return ({
     search: async(paginated) => {
-      const allowedGenre = ["fiction", "non_fiction", "poetry"];
       if (!allowedGenre.includes(paginated.genre)) {
         errorFactory.createInvalidDataError(
-          "El genero que intenta buscar no existe"
+          "El género que intenta buscar no existe"
         );
       }
     return await textDao.getByGenre(paginated.page,paginated.genre,textsToShowByPage);

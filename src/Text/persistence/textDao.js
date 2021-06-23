@@ -30,6 +30,7 @@ function createTextDao(firebaseDb) {
 
       collection.forEach((doc) => {
         // transformar firestore timestamp a Date
+        //Mandar al if:
         const date = doc.data().createdAt.toDate();
         const text = {
           ...doc.data(),
