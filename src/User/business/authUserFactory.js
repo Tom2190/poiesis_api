@@ -14,4 +14,4 @@ function createCUAuthUser() {
   return createAuthUser(userDao, mailer, emailTextDao);
 }
 
-export default createCUAuthUser;
+export { createCUAuthUser };

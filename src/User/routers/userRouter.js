@@ -1,5 +1,5 @@
 import express from "express";
-import createCUAuthUser from "../business/authUserFactory.js";
+import { createCUAuthUser } from "../business/authUserFactory.js";
 
 const CUAuthUser = createCUAuthUser();
 
