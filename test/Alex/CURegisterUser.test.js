@@ -8,13 +8,13 @@ const server = await createServer(PORT);
 const user = {
   name: "Alex",
   lastName: "Costa",
-  email: "alexuniaoa28@gmail.com",
+  email: "alexunio28@gmail.com",
   password: "123456",
   chosenDateTime: "Martes y Jueves",
   writingFrequency: "Nada",
   writingGenre: "Narrativo",
   phone: "1123318739",
-  dni: "43844448",
+  dni: "43820248",
 };
 
 console.log("=========Register=========");

@@ -2,6 +2,7 @@ import express from "express";
 import createUserRouter from "../../User/routers/userRouter.js";
 import createSignUpRouter from "../../User/routers/signUpRouter.js";
 import createTextRouter from "../../Text/routers/textRouter.js";
+import createLoginRouter from "../../User/routers/loginRouter.js";
 
 async function createServer(port) {
   const app = express();
@@ -22,6 +23,7 @@ async function createServer(port) {
 
   app.use("/users", createUserRouter());
   app.use("/signup", createSignUpRouter());
+  app.use("/login", createLoginRouter());
   app.use("/texts", createTextRouter());
 
   return new Promise((resolve, reject) => {

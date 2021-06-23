@@ -15,6 +15,18 @@ function createUserDao(firebaseDb) {
       const doc = await firebaseDb.collection("users").doc(id).get();
       return { ...doc.data(), id: doc.id }
     },
+    getByEmail: async (email) => {
+      const collection = await firebaseDb.collection('users').get();
+      const user = collection.docs.filter(doc => {
+        if(doc.data().email===email){
+          return doc;
+        }
+      })[0];
+      if(user){
+        return { ...user.data(), id: user.id }
+      }
+      return user;
+    },
     getAll: async () => {
       let users = [];
       const collection = await firebaseDb.collection('users').get();
