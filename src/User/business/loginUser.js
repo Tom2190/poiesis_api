@@ -1,7 +1,7 @@
 /*
   Author: Alex Costa
 */
-import {createEmail} from "../Models/Email.js";
+import { createEmail } from "../Models/Email.js";
 import createErrorFactory from "../../shared/errors/ErrorFactory.js";
 
 function createLoginUser(daoUsers) {
@@ -11,10 +11,10 @@ function createLoginUser(daoUsers) {
     loginUser: async (userData) => {
       const email = createEmail(userData.email);
       const user = await daoUsers.getByEmail(email);
-      if (user && userData.password===user.password) {
+      if (user && userData.password === user.password) {
         return user.id;
       }
-      errorFactory.createInvalidDataError("Email y/o Contraseña invalidas.")
+      errorFactory.throwInvalidDataError("Email y/o Contraseña invalidas.");
     },
   };
 }

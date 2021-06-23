@@ -6,7 +6,7 @@ function createEmail(email) {
 
   const emailRegularExpresion = /\S+@\S+\.\S+/;
   if (emailRegularExpresion.test(String(email).toLowerCase()) == false) {
-    errorFactory.createInvalidDataError("El email es invalido");
+    errorFactory.throwInvalidDataError("El email es invalido");
   }
 
   return email;

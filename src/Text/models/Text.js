@@ -20,29 +20,27 @@ function crearNewText(data) {
   text.userId = data.userId;
 
   if (!data.title) {
-    errorFactory.createInvalidDataError("Falta el título");
+    errorFactory.throwInvalidDataError("Falta el título");
   } else {
     text.title = data.title;
   }
 
   if (!allowedGenre.includes(data.genre)) {
-    errorFactory.createInvalidDataError(
-      "el genero que intenta crear no existe"
-    );
+    errorFactory.throwInvalidDataError("el genero que intenta crear no existe");
   } else {
     text.genre = data.genre;
   }
 
   if (data.hasPdf && !data.containsFile) {
-    errorFactory.createInvalidDataError("pdf no adjuntado");
+    errorFactory.throwInvalidDataError("pdf no adjuntado");
   }
 
   if (!data.hasPdf && isEmpty(data.content)) {
-    errorFactory.createInvalidDataError("este texto no tiene contenido");
+    errorFactory.throwInvalidDataError("este texto no tiene contenido");
   }
 
   if (!data.hasPdf && data.containsFile) {
-    errorFactory.createInvalidDataError(
+    errorFactory.throwInvalidDataError(
       "el texto que se intenta crear no deberia contener archivos adjuntos"
     );
   }

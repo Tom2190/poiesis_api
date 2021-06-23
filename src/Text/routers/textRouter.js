@@ -34,17 +34,16 @@ function createTextRouter() {
       const text = await CU_CreateText.createText(info);
       res.status(201).json(text);
     } catch (error) {
-      console.log("ERROR", error.message);
       next(error);
     }
   });
 
   textRouter.get("/", async (req, res, next) => {
-    try {         
-      const paginatedTexts= await getTextByPageFactory.search(req.query); 
+    try {
+      const paginatedTexts = await getTextByPageFactory.search(req.query);
       res.json({
         content: paginatedTexts,
-      })
+      });
       /*
         const page = parseInt(req.query.page);
         const genre = req.query.genre;

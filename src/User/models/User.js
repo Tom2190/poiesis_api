@@ -9,30 +9,30 @@ function createUser(data) {
   const user = {};
 
   if (!data.name) {
-    errorFactory.createInvalidDataError("Falta el nombre");
+    errorFactory.throwInvalidDataError("Falta el nombre");
   } else {
     user.name = data.name;
   }
 
   if (!data.lastName) {
-    errorFactory.createInvalidDataError("Falta el apellido");
+    errorFactory.throwInvalidDataError("Falta el apellido");
   } else {
     user.lastName = data.lastName;
   }
 
   if (!data.email) {
-    errorFactory.createInvalidDataError("Ingreso inválido del email");
+    errorFactory.throwInvalidDataError("Ingreso inválido del email");
   }
   user.email = createEmail(data.email);
 
   if (!data.password) {
-    errorFactory.createInvalidDataError("Falta la contrasña");
+    errorFactory.throwInvalidDataError("Falta la contrasña");
   } else {
     user.password = data.password;
   }
 
   if (!data.chosenDateTime) {
-    errorFactory.createInvalidDataError(
+    errorFactory.throwInvalidDataError(
       "Falta indicar el día y horario predilecto"
     );
   } else {
@@ -40,7 +40,7 @@ function createUser(data) {
   }
 
   if (!data.writingFrequency) {
-    errorFactory.createInvalidDataError(
+    errorFactory.throwInvalidDataError(
       "Falta indicar la frecuencia de escritura"
     );
   } else {
@@ -48,7 +48,7 @@ function createUser(data) {
   }
 
   if (!data.writingGenre) {
-    errorFactory.createInvalidDataError(
+    errorFactory.throwInvalidDataError(
       "Falta indicar su género de escritura predilecto"
     );
   } else {
@@ -56,13 +56,13 @@ function createUser(data) {
   }
 
   if (!data.phone) {
-    errorFactory.createInvalidDataError("Falta el celular");
+    errorFactory.throwInvalidDataError("Falta el celular");
   } else {
     user.phone = data.phone;
   }
 
   if (!data.dni) {
-    errorFactory.createInvalidDataError("Falta el dni");
+    errorFactory.throwInvalidDataError("Falta el dni");
   }
   user.dni = createDni(data.dni);
 

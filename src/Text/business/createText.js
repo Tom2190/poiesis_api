@@ -15,7 +15,7 @@ function createText(userDao, textDao, fileDao) {
         if (tempFilePath) {
           fs.unlinkSync(tempFilePath);
         }
-        errorFactory.createUserNotFoundError("Usuario no identificado");
+        errorFactory.throwUserNotFoundError("Usuario no identificado");
       }
 
       let newText = crearNewText(textData);
@@ -29,7 +29,7 @@ function createText(userDao, textDao, fileDao) {
           newText.pdfFileId = fileId;
         } catch (err) {
           // TODO tirar error
-          errorFactory.createDataBaseError(
+          errorFactory.throwDataBaseError(
             "Error en Drive al intentar subir el archivo"
           );
         } finally {
@@ -40,11 +40,12 @@ function createText(userDao, textDao, fileDao) {
       const createdTextId = await textDao.addUnique(newText);
 
       if (!createdTextId) {
-        errorFactory.createDuplicateTextError(
+        errorFactory.throwDuplicateTextError(
           "El texto que desea agregar ya existe con ese titulo"
         );
       }
-      return { ...newText, id: createdTextId };
+      newText.id = createdTextId;
+      return newText;
     },
   };
 }

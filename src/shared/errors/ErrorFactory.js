@@ -6,19 +6,19 @@ import { createDuplicateTextError } from "./DuplicateTextError.js";
 
 function createErrorFactory() {
   return {
-    createDataBaseError: (message) => {
+    throwDataBaseError: (message) => {
       throw createDataBaseError(message);
     },
-    createInvalidDataError: (message) => {
+    throwInvalidDataError: (message) => {
       throw createInvalidDataError(message);
     },
-    createUserNotFoundError: (message) => {
+    throwUserNotFoundError: (message) => {
       throw createUserNotFoundError(message);
     },
-    createDuplicateUserError: (message) => {
+    throwDuplicateUserError: (message) => {
       throw createDuplicateUserError(message);
     },
-    createDuplicateTextError: (message) => {
+    throwDuplicateTextError: (message) => {
       throw createDuplicateTextError(message);
     },
   };
