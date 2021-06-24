@@ -1,8 +1,10 @@
 import express from "express";
 import createUserRouter from "../../User/routers/userRouter.js";
-import createSignUpRouter from "../../User/routers/signUpRouter.js";
 import createTextRouter from "../../Text/routers/textRouter.js";
 import createLoginRouter from "../../User/routers/loginRouter.js";
+import createSignUpRouter from "../../User/routers/signUpRouter.js";
+import createUpdateUserRouter from "../../User/routers/updateUserRouter.js";
+
 
 async function createServer(port) {
   const app = express();
@@ -14,7 +16,7 @@ async function createServer(port) {
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', '*');
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -25,6 +27,7 @@ async function createServer(port) {
   app.use("/signup", createSignUpRouter());
   app.use("/login", createLoginRouter());
   app.use("/texts", createTextRouter());
+  app.use("/update", createUpdateUserRouter());
 
   return new Promise((resolve, reject) => {
     const server = app

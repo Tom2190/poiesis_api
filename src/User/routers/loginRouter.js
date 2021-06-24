@@ -8,7 +8,7 @@ function createLoginRouter() {
 
   const CU_loginUser = createLoginUserFactory();
 
-  loginRouter.post("/", async (req, res, next) => {
+  loginRouter.post("/", async (req, res, next) => { 
     try {
       const userId = await CU_loginUser.loginUser(req.body);
       const token = getToken({ id: userId });
