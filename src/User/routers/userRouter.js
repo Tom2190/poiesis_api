@@ -10,7 +10,8 @@ function createUserRouter() {
 
   router.get("/", async (req, res, next) => {
     try {
-      const user = await getUser.get(req.body.id);
+      const user = await getUser.get(req.query.id);
+      console.log(user)
       res.status(200).json(user)
     } catch (error) {
       next(error);
