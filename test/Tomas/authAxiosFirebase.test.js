@@ -7,7 +7,6 @@ const URL = `http://localhost:${port}/users`;
 const server = await createServer(port);
 const registerFactory = createRegisterUserFactory();
 
-// Cambiar email y dni para probar de nuevo
 const testUser = {
   name: "Tomás",
   lastName: "Fernández Abrevaya",
@@ -20,17 +19,22 @@ const testUser = {
   dni: "35324852",
 };
 
+const idTestUser = 'ixNUgpM7jkTgo7cZOMWT'
+
 try {
   
   //Agrego al testUser a Firebase y mando email de confirmación
-  const user = await registerFactory.registerUser(testUser);
+  //const user = await registerFactory.registerUser(testUser);
   
   //Autorizo al usuario a subir textos y mando email de confirmación
-  const res = await axios.post(URL, { id: user.id });
-  console.log(res.data);
+  const userGet = await axios.get( URL, { id: idTestUser } )
+  console.log(userGet.id)
+  //const res = await axios.post( URL, { id: userGet.id } );
+  //console.log(res.data.message);
+  
   
 } catch (err) {
-  console.log("error auth", err);
+  console.log("error test", err);
 }
 
 server.close();
