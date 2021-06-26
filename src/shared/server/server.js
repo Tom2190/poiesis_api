@@ -3,7 +3,6 @@ import createUserRouter from "../../User/routers/userRouter.js";
 import createTextRouter from "../../Text/routers/textRouter.js";
 import createLoginRouter from "../../User/routers/loginRouter.js";
 import createSignUpRouter from "../../User/routers/signUpRouter.js";
-import createUpdateUserRouter from "../../User/routers/updateUserRouter.js";
 
 
 async function createServer(port) {
@@ -27,7 +26,6 @@ async function createServer(port) {
   app.use("/signup", createSignUpRouter());
   app.use("/login", createLoginRouter());
   app.use("/texts", createTextRouter());
-  app.use("/update", createUpdateUserRouter());
 
   return new Promise((resolve, reject) => {
     const server = app

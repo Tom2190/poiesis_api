@@ -1,9 +1,12 @@
 import express from "express";
-import { createCUAuthUser } from "../business/authUserFactory.js";
+import { verifyToken } from "../../shared/jwt/jwt.js";
 import { getUserFactory } from "../business/getUserFactory.js";
+import { createCUAuthUser } from "../business/authUserFactory.js";
+import createChangePasswordUser from "../business/ChangePasswordUserFactory.js";
 
 const getUser = getUserFactory();
 const CUAuthUser = createCUAuthUser();
+const CU_ChangePassword = createChangePasswordUser();
 
 function createUserRouter() {
   const router = express.Router();
@@ -27,9 +30,19 @@ function createUserRouter() {
     }
   });
 
+  router.post("/password", verifyToken, async (req, res, next) => { 
+    try {
+      await CU_ChangePassword.changePassword({...req.body, userId: req.userId});
+      res.status(200).json({message:"Updated password"});
+    } catch (error) {
+      next(error);
+    }
+  });
+
   router.use((error, req, res, next) => {
     if (
       error.type === "USER_NOT_FOUND_ERROR"
+      || error.type === "INVALID_DATA_ERROR"
     ) {
       res.status(404);
     } else {
