@@ -14,6 +14,10 @@ function createGetUser(dao) {
       }
       return user;
     },
+    getAll: async () => {
+      const users = await dao.getAll();
+      return users;
+    },
   };
 }
 
