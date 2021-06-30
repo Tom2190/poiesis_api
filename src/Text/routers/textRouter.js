@@ -3,6 +3,7 @@ import upload from "../middleware/fileUpload.js";
 import { verifyToken } from "../../shared/jwt/jwt.js";
 import { createTextFactory } from "../business/createTextFactory.js";
 import createTextsByPageFactory from "../business/getTextByPageFactory.js";
+import createTextByIdFactory from "../business/getTextByIdFactory.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,6 +13,7 @@ import { getUploadFolderPath } from "../../config.js";
 
 const CU_CreateText = createTextFactory();
 const getTextByPageFactory = createTextsByPageFactory();
+const getTextByIdFactory = createTextByIdFactory();
 
 function createTextRouter() {
   const textRouter = express.Router();
@@ -35,6 +37,15 @@ function createTextRouter() {
       res.status(201).json(text);
     } catch (error) {
       next(error);
+    }
+  });
+
+  textRouter.get("/detail", async (req, res, next) => {
+    try {
+      const text = await getTextByIdFactory.getById(req.query.textId);
+      res.status(201).json(text);
+    } catch (err) {
+      next(err);
     }
   });
 

@@ -2,8 +2,14 @@ function createTextDao(firebaseDb) {
   return {
     addUnique: async (textData) => {
       const collection = await firebaseDb.collection("texts").get();
+      const docUser = await firebaseDb
+        .collection("users")
+        .doc(textData.userId)
+        .get();
+      const user = docUser.data();
+      const userName = `${user.name} ${user.lastName}`;
       const exists = collection.docs.some((doc) => {
-        const text = { ...doc.data() };
+        const text = { ...doc.data(), userName };
         return text.title === textData.title;
       });
       if (exists) {
@@ -23,9 +29,14 @@ function createTextDao(firebaseDb) {
       });
       return texts;
     },
-    getByGenre: async (page, selectedGenre,textsToShowByPage) => {
+    getById: async (id) => {
+      const doc = await firebaseDb.collection("texts").doc(id).get();
+      const date = doc.data().createdAt.toDate();
+      return { ...doc.data(), id: doc.id, createdAt: date };
+    },
+    getByGenre: async (page, selectedGenre, textsToShowByPage) => {
       const collection = await firebaseDb.collection("texts").get();
-     // const textsToShowByPage = 9;
+      // const textsToShowByPage = 9;
       let paginatedTexts = [];
 
       collection.forEach((doc) => {
