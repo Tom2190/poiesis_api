@@ -19,17 +19,17 @@ const testUser = {
   dni: "35324852",
 };
 
-const idTestUser = 'ixNUgpM7jkTgo7cZOMWT'
 
 try {
   
   //Agrego al testUser a Firebase y mando email de confirmación
   const user = await registerFactory.registerUser(testUser);
   
+  //const idTestUser = 'ixNUgpM7jkTgo7cZOMWT'
   //const userGet = await axios.get( URL, { id: idTestUser } )
   
   //Autorizo al usuario a subir textos y mando email de confirmación
-  const res = await axios.post( URL, { id: userGet.id } );
+  const res = await axios.post( URL, { id: user.id } );
   console.log(res.data.message);
   
   
