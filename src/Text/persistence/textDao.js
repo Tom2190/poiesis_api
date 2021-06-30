@@ -8,8 +8,9 @@ function createTextDao(firebaseDb) {
         .get();
       const user = docUser.data();
       const userName = `${user.name} ${user.lastName}`;
+      textData.userName = userName;
       const exists = collection.docs.some((doc) => {
-        const text = { ...doc.data(), userName };
+        const text = { ...doc.data() };
         return text.title === textData.title;
       });
       if (exists) {
