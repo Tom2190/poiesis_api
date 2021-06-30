@@ -1,9 +1,9 @@
 import express from "express";
 import upload from "../middleware/fileUpload.js";
 import { verifyToken } from "../../shared/jwt/jwt.js";
-import { createTextFactory } from "../business/createTextFactory.js";
-import createTextsByPageFactory from "../business/getTextByPageFactory.js";
-import createTextByIdFactory from "../business/getTextByIdFactory.js";
+import { createCUcreateTextFactory } from "../business/createTextFactory.js";
+import { createCUTextsByPageFactory } from "../business/getTextByPageFactory.js";
+import { createCUTextByIdFactory } from "../business/getTextByIdFactory.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -11,9 +11,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import { getUploadFolderPath } from "../../config.js";
 
-const CU_CreateText = createTextFactory();
-const getTextByPageFactory = createTextsByPageFactory();
-const getTextByIdFactory = createTextByIdFactory();
+const CU_CreateText = createCUcreateTextFactory();
+const CU_TextByPage = createCUTextsByPageFactory();
+const CU_TextById = createCUTextByIdFactory();
 
 function createTextRouter() {
   const textRouter = express.Router();
@@ -42,8 +42,17 @@ function createTextRouter() {
 
   textRouter.get("/detail", async (req, res, next) => {
     try {
-      const text = await getTextByIdFactory.getById(req.query.textId);
+      const text = await CU_TextById.getByTextId(req.query.textId);
       res.status(201).json(text);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  textRouter.get("/user", verifyToken, async (req, res, next) => {
+    try {
+      const texts = await CU_TextById.getByUserId(req.userId);
+      res.status(201).json(texts);
     } catch (err) {
       next(err);
     }
@@ -51,14 +60,14 @@ function createTextRouter() {
 
   textRouter.get("/", async (req, res, next) => {
     try {
-      const paginatedTexts = await getTextByPageFactory.search(req.query);
+      const paginatedTexts = await CU_TextByPage.search(req.query);
       res.json({
         content: paginatedTexts,
       });
       /*
         const page = parseInt(req.query.page);
         const genre = req.query.genre;
-        const paginatedTexts = await getTextByPageFactory.search(page, genre);
+        const paginatedTexts = await CU_TextByPage.search(page, genre);
       
         res.json({
         page,

@@ -10,8 +10,8 @@ const userDao = createUserDaoFactory();
 const textDao = createTextDaoFactory();
 const fileDao = createFileDaoFactory();
 
-function createTextFactory() {
+function createCUcreateTextFactory() {
   return createText(userDao, textDao, fileDao);
 }
 
-export { createTextFactory };
+export { createCUcreateTextFactory };

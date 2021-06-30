@@ -1,14 +1,14 @@
 import getTextsById from "./getTextsById.js";
 import createTextDao from "../persistence/textDao.js";
 import { firebaseDb } from "../../shared/Firebase/firebase.js";
+import createUserDaoFactory from "../../User/persistence/userDaoFactory.js";
 
 const textDao = createTextDao(firebaseDb);
+const userDao = createUserDaoFactory();
 
-// Cambiar nombre
-function createTextByIdFactory() {
-  const text = getTextsById(textDao);
-  return text;
+function createCUTextByIdFactory() {
+  return getTextsById(textDao, userDao);
 }
 
 //Exportar con llaves
-export default createTextByIdFactory;
+export { createCUTextByIdFactory };

@@ -1,7 +1,18 @@
-function getTextsById(textDao) {
+import createErrorFactory from "../../shared/errors/ErrorFactory.js";
+
+function getTextsById(textDao, userDao) {
+  const errorFactory = createErrorFactory();
+
   return {
-    getById: async (id) => {
-      return await textDao.getById(id);
+    getByTextId: async (textId) => {
+      return await textDao.getById(textId);
+    },
+    getByUserId: async (userId) => {
+      const user = await userDao.getById(userId);
+      if (!user) {
+        errorFactory.throwUserNotFoundError("Usuario no identificado");
+      }
+      return await textDao.getAllByUser(userId);
     },
   };
 }
