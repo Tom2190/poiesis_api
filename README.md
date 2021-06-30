@@ -69,7 +69,7 @@ Para levantar el proyecto es necesario:
 
 ```
 {
- "Updated user"
+ "User auth: ok"
 }
 ```
 

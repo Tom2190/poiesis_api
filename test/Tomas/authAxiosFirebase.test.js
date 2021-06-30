@@ -24,13 +24,13 @@ const idTestUser = 'ixNUgpM7jkTgo7cZOMWT'
 try {
   
   //Agrego al testUser a Firebase y mando email de confirmación
-  //const user = await registerFactory.registerUser(testUser);
+  const user = await registerFactory.registerUser(testUser);
+  
+  //const userGet = await axios.get( URL, { id: idTestUser } )
   
   //Autorizo al usuario a subir textos y mando email de confirmación
-  const userGet = await axios.get( URL, { id: idTestUser } )
-  console.log(userGet.id)
-  //const res = await axios.post( URL, { id: userGet.id } );
-  //console.log(res.data.message);
+  const res = await axios.post( URL, { id: userGet.id } );
+  console.log(res.data.message);
   
   
 } catch (err) {
